@@ -1,6 +1,6 @@
 Date       Version  Comment
 ---------------------------------------------------------------------------
-?/1  2004  1.1.1    Now compiles even if libintl.h is missing
+4/1  2004  1.1.1    Now compiles even if libintl.h is missing
                     Replaced the -k switch with -l (--wipelabel) with the
                     inverted functionality. This functionality was also
                     implemented for FAT12 and FAT16.
