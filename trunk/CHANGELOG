@@ -1,5 +1,8 @@
 Date       Version  Comment
 ---------------------------------------------------------------------------
+?/10 2004  2.1.0    Now ms-sys is able to identify an ms-dos MBR with the
+                    undocumented F2 instruction.
+
 5/6  2004  2.0.0    Now ms-sys should compile cleanly also with a 2.6 Linux
                     kernel based distribution.
 
