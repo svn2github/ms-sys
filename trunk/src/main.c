@@ -11,7 +11,7 @@
 #include "nls.h"
 #include "partition_info.h"
 
-#define VERSION "1.1.3alfa1"
+#define VERSION "1.1.3alfa2"
 
 void print_help(const char *szCommand);
 void print_version(void);
@@ -69,6 +69,16 @@ int main(int argc, char **argv)
       {
 	 printf(_("Start sector (nr of hidden sectors) successfully written to %s\n"),
 		argv[argc-1]);
+	 if( write_partition_physical_disk_drive_id(fp) )
+	 {
+	    printf(_("Physical disk drive id 0x80 (C:) successfully written to %s\n"),
+		   argv[argc-1]);
+	 }
+	 else
+	 {
+	    printf(_("Failed writing physical disk drive id to %s\n"),
+		   argv[argc-1]);
+	 }
       }
       else
       {
@@ -229,7 +239,9 @@ void print_help(const char *szCommand)
    printf(
       _("    -l, --wipelabel Reset partition disk label in boot record\n"));
    printf(
-      _("    -p, --partition Write partition info (hidden sectors) to boot record\n"));
+      _("    -p, --partition Write partition info (hidden sectors and drive id)\n"));
+   printf(
+      _("                    to boot record\n"));
    printf(
       _("    -m, --mbr       Write a Windows 2000/XP/2003 MBR to device\n"));
    printf(
@@ -269,6 +281,7 @@ int parse_switches(int argc, char **argv, int *piBr,
 		   int *pbKeepLabel, int *pbWritePartitionInfo)
 {
    int bHelp = 0;
+   int i;
 
    *piBr = NO_WRITING;
    *pbForce = 0;
@@ -289,47 +302,88 @@ int parse_switches(int argc, char **argv, int *piBr,
    /* Don't parse the name of the program */
    while(--argc)
    {
-      if(( ! strcmp("-1", argv[argc])) || ( ! strcmp("--fat12", argv[argc])))
+      if( ! strcmp("--fat12", argv[argc]))
 	 *piBr = FAT12_BR;
-      else if(( ! strcmp("-2", argv[argc])) ||
-	      ( ! strcmp("--fat32nt", argv[argc])))
+      else if( ! strcmp("--fat32nt", argv[argc]))
 	 *piBr = FAT32NT_BR;
-      else if(( ! strcmp("-3", argv[argc])) ||
-	      ( ! strcmp("--fat32", argv[argc])))
+      else if( ! strcmp("--fat32", argv[argc]))
 	 *piBr = FAT32_BR;
-      else if(( ! strcmp("-6", argv[argc])) ||
-	      ( ! strcmp("--fat16", argv[argc])))
+      else if( ! strcmp("--fat16", argv[argc]))
 	 *piBr = FAT16_BR;
-      else if(( ! strcmp("-f", argv[argc])) ||
-	      ( ! strcmp("--force", argv[argc])))
+      else if( ! strcmp("--force", argv[argc]))
 	 *pbForce = 1;
-      else if(( ! strcmp("-l", argv[argc])) ||
-	      ( ! strcmp("--wipelabel", argv[argc])))
+      else if( ! strcmp("--wipelabel", argv[argc]))
 	 *pbKeepLabel = 0;
-      else if(( ! strcmp("-p", argv[argc])) ||
-	      ( ! strcmp("--partition", argv[argc])))
+      else if( ! strcmp("--partition", argv[argc]))
 	 *pbWritePartitionInfo = 1;
-      else if(( ! strcmp("-m", argv[argc])) ||
-	      ( ! strcmp("--mbr", argv[argc])))
+      else if( ! strcmp("--mbr", argv[argc]))
 	 *piBr = MBR_2000;
-      else if(( ! strcmp("-9", argv[argc])) ||
-	      ( ! strcmp("--mbr95b", argv[argc])))
+      else if( ! strcmp("--mbr95b", argv[argc]))
 	 *piBr = MBR_95B;
-      else if(( ! strcmp("-d", argv[argc])) ||
-	      ( ! strcmp("--mbrdos", argv[argc])))
+      else if( ! strcmp("--mbrdos", argv[argc]))
 	 *piBr = MBR_DOS;
-      else if(( ! strcmp("-s", argv[argc])) ||
-	      ( ! strcmp("--mbrsyslinux", argv[argc])))
+      else if( ! strcmp("--mbrsyslinux", argv[argc]))
 	 *piBr = MBR_SYSLINUX;
-      else if(( ! strcmp("-z", argv[argc])) ||
-	      ( ! strcmp("--mbrzero", argv[argc])))
+      else if( ! strcmp("--mbrzero", argv[argc]))
 	 *piBr = MBR_ZERO;
-      else if(( ! strcmp("-w", argv[argc])) ||
-	      ( ! strcmp("--write", argv[argc])))
+      else if( ! strcmp("--write", argv[argc]))
 	 *piBr = AUTO_BR;
-      else if(( ! strcmp("-v", argv[argc])) ||
-	      ( ! strcmp("--version", argv[argc])))
+      else if( ! strcmp("--version", argv[argc]))
 	 *pbPrintVersion = 1;
+      else if( (argv[argc][0] == '-') && (argv[argc][1] != '-') )
+      {
+	 for(i=1; argv[argc][i]; i++)
+	 {
+	    switch(argv[argc][i])
+	    {
+	       case '1':
+		  *piBr = FAT12_BR;
+		  break;
+	       case '2':
+		  *piBr = FAT32NT_BR;
+		  break;
+	       case '3':
+		  *piBr = FAT32_BR;
+		  break;
+	       case '6':
+		  *piBr = FAT16_BR;
+		  break;
+	       case 'f':
+		  *pbForce = 1;
+		  break;
+	       case 'l':
+		  *pbKeepLabel = 0;
+		  break;
+	       case 'p':
+		  *pbWritePartitionInfo = 1;
+		  break;
+	       case 'm':
+		  *piBr = MBR_2000;
+		  break;
+	       case '9':
+		  *piBr = MBR_95B;
+		  break;
+	       case 'd':
+		  *piBr = MBR_DOS;
+		  break;
+	       case 's':
+		  *piBr = MBR_SYSLINUX;
+		  break;
+	       case 'z':
+		  *piBr = MBR_ZERO;
+		  break;
+	       case 'w':
+		  *piBr = AUTO_BR;
+		  break;
+	       case 'v':
+		  *pbPrintVersion = 1;
+		  break;
+	       default:
+		  bHelp=1;
+		  break;
+	    }
+	 }
+      }
       else
 	 bHelp = 1;
    }

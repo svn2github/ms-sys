@@ -272,7 +272,7 @@ void diagnose(FILE *fp, const char *szPath)
       printf(
 	 _("would create with the switch -1 on a floppy.\n"));
    }
-   else if(is_fat_16_br(fp))
+   else if(is_fat_16_br(fp) || is_fat_32_br(fp))
    {
       if(entire_fat_16_br_matches(fp))
       {
@@ -281,18 +281,7 @@ void diagnose(FILE *fp, const char *szPath)
 	 printf(
 	    _("would create with the switch -6 on a FAT16 partition.\n"));
       }
-      else
-      {
-	 printf(
-	    _("it seems to be a FAT16 boot record, but it differs from\n"));
-	 printf(
-	    _("what this program would create with the switch -6 on a\n"));
-	 printf(_("FAT16 partition.\n"));
-      }
-   }
-   else if(is_fat_32_br(fp))
-   {
-      if(entire_fat_32_br_matches(fp))
+      else if(entire_fat_32_br_matches(fp))
       {
 	 printf(
 	  _("it is exactly the kind of FAT32 DOS boot record this program\n"));
@@ -309,12 +298,12 @@ void diagnose(FILE *fp, const char *szPath)
       else
       {
 	 printf(
-	   _("it seems to be a FAT32 boot record, but it differs from\n"));
+	    _("it seems to be a FAT16 or FAT32 boot record, but it\n"));
 	 printf(
-	    _("what this program would create with the switches -3 or -2\n"));
-	 printf(_("on a FAT32 partition.\n"));
+	    _("differs from what this program would create with the\n"));
+	 printf(_("switch -6, -2 or -3 on a FAT16 or FAT32 partition.\n"));
       }
-   }
+   } 
    else if(is_lilo_br(fp))
    {
       printf(_("it seems to be a LILO boot record, please use lilo to\n"));

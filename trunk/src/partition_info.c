@@ -20,3 +20,10 @@ int write_partition_start_sector_number(FILE *fp)
    aucBuf[3] = (l & 0xff000000) >> 24;
    return write_data(fp, 0x1c, aucBuf, 4);
 } /* write_start_sector */
+
+int write_partition_physical_disk_drive_id(FILE *fp)
+{
+   unsigned char ucId = 0x80; /* C: */
+   
+   return write_data(fp, 0x40, &ucId, 1);
+} /* write_partition_physical_disk_drive_id */
