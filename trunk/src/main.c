@@ -11,7 +11,7 @@
 #include "nls.h"
 #include "partition_info.h"
 
-#define VERSION "1.1.3alfa2"
+#define VERSION "1.1.3"
 
 void print_help(const char *szCommand);
 void print_version(void);
