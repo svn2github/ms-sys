@@ -16,6 +16,9 @@
 #define MBR_ZERO   10
 #define NUMBER_OF_RECORD_TYPES 	11
 
+/* Returns the number of sectors on disk before partition */
+unsigned long partition_start_sector(FILE *fp);
+
 /* Returns TRUE if writing a boot record of type iBr seems like a good idea,
    otherwise FALSE */
 int sanity_check(FILE *fp, const char *szPath, int iBr, int bPrintMessages);

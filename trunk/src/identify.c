@@ -68,6 +68,26 @@ static int is_partition(FILE *fp)
    return (! (iRes1 && iRes2)) && (sGeometry.start);
 } /* is_partition */
 
+unsigned long partition_start_sector(FILE *fp)
+{
+   int iRes1;
+   int iRes2;
+   long lSectors;
+   struct hd_geometry sGeometry;
+   int iFd = fileno(fp);
+   
+   iRes1 = ioctl(iFd, BLKGETSIZE, &lSectors);
+#ifdef HDIO_REQ
+   iRes2 = ioctl(iFd, HDIO_REQ, &sGeometry);
+#else
+   iRes2 = ioctl(iFd, HDIO_GETGEO, &sGeometry);
+#endif
+   if(! (iRes1 && iRes2) )
+      return sGeometry.start;
+   else
+      return 0L;
+} /* partition_start_sector */
+
 int sanity_check(FILE *fp, const char *szPath, int iBr, int bPrintMessages)
 {
    int bIsDiskDevice = is_disk_device(fp);
