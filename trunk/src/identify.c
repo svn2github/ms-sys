@@ -228,18 +228,7 @@ void diagnose(FILE *fp, const char *szPath)
 	 printf(
 	    _("would create with the switch -3 on a FAT32 partition.\n"));
       }
-      else
-      {
-	 printf(
-	   _("it seems to be a FAT32 DOS boot record, but it differs from\n"));
-	 printf(
-	    _("what this program would create with the switch -3 on a\n"));
-	 printf(_("FAT32 partition.\n"));
-      }
-   }
-   else if(is_fat_32_nt_br(fp))
-   {
-      if(entire_fat_32_nt_br_matches(fp))
+      else if(entire_fat_32_nt_br_matches(fp))
       {
 	 printf(
 	   _("it is exactly the kind of FAT32 NT boot record this program\n"));
@@ -249,10 +238,10 @@ void diagnose(FILE *fp, const char *szPath)
       else
       {
 	 printf(
-	    _("it seems to be a FAT32 NT boot record, but it differs from\n"));
+	   _("it seems to be a FAT32 boot record, but it differs from\n"));
 	 printf(
-	    _("what this program would create with the switch -2 on a\n"));
-	 printf(_("FAT32 partition.\n"));
+	    _("what this program would create with the switches -3 or -2\n"));
+	 printf(_("on a FAT32 partition.\n"));
       }
    }
    else if(is_lilo_br(fp))
