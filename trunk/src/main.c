@@ -4,16 +4,17 @@
 
 #include "fat12.h"
 #include "fat32.h"
+#include "fat32nt.h"
 #include "br.h"
 #include "identify.h"
 #include "nls.h"
 
-#define VERSION "1.0.2"
+#define VERSION "1.1.0alfa1"
 
 void print_help(const char *szCommand);
 void print_version(void);
 int parse_switches(int argc, char **argv, int *piBr,
-		   int *pbForce, int *pbPrintVersion);
+		   int *pbForce, int *pbPrintVersion, int *pbKeepLabel);
 
 int main(int argc, char **argv)
 {
@@ -21,10 +22,11 @@ int main(int argc, char **argv)
    int iBr = NO_WRITING;
    int bForce = 0;
    int bPrintVersion = 0;
+   int bKeepLabel = 0;
    int iRet = 0;
 
    nls_init();
-   if(parse_switches(argc, argv, &iBr, &bForce, &bPrintVersion))
+   if(parse_switches(argc, argv, &iBr, &bForce, &bPrintVersion, &bKeepLabel))
    {
       print_help(argv[0]);
       return 0;
@@ -87,14 +89,27 @@ int main(int argc, char **argv)
 	 }	    
       }
       break;	 
-      case FAT32_BR:
+      case FAT32NT_BR:
       {
-	 if(write_fat_32_br(fp))
-	    printf(_("FAT32 boot record successfully written to %s\n"),
+	 if(write_fat_32_nt_br(fp, bKeepLabel))
+	    printf(_("FAT32 NT boot record successfully written to %s\n"),
 		   argv[argc-1]);
 	 else
 	 {
-	    printf(_("Failed writing FAT32 boot record to %s\n"),
+	    printf(_("Failed writing FAT32 NT boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }	    
+      }
+      break;
+      case FAT32_BR:
+      {
+	 if(write_fat_32_br(fp, bKeepLabel))
+	    printf(_("FAT32 DOS boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing FAT32 DOS boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
 	 }	    
@@ -116,11 +131,12 @@ void print_help(const char *szCommand)
    printf(
      _("    -1, --fat12     Write a FAT12 floppy boot record to device\n"));
    printf(
-     _("    -3, --fat32     Write a FAT32 partition boot record to device\n"));
+     _("    -2, --fat32nt   Write a FAT32 partition NT boot record to device\n"));
+   printf(
+     _("    -3, --fat32     Write a FAT32 partition DOS boot record to device\n"));
    printf(_("    -f, --force     Force writing of boot record\n"));
    printf(_("    -h, --help      Display this help and exit\n"));
-   /* A planned feature for next beta version */
-   /* printf(_("    -k, --keeplabel Do not reset disk label\n")); */
+   printf(_("    -k, --keeplabel Do not reset partition disk label\n"));
    printf(_("    -m, --mbr       Write a master boot record to device\n"));
    printf(_("    -v, --version   Show program version\n"));
    printf(
@@ -141,13 +157,14 @@ void print_version(void)
 } /* print_version */
 
 int parse_switches(int argc, char **argv, int *piBr,
-		   int *pbForce, int *pbPrintVersion)
+		   int *pbForce, int *pbPrintVersion, int *pbKeepLabel)
 {
    int bHelp = 0;
 
    *piBr = NO_WRITING;
    *pbForce = 0;
-   *pbPrintVersion=0;
+   *pbPrintVersion = 0;
+   *pbKeepLabel = 0;
    
    if(argc < 2)
       return 1;
@@ -164,12 +181,18 @@ int parse_switches(int argc, char **argv, int *piBr,
    {
       if(( ! strcmp("-1", argv[argc])) || ( ! strcmp("--fat12", argv[argc])))
 	 *piBr = FAT12_BR;
+      else if(( ! strcmp("-2", argv[argc])) ||
+	      ( ! strcmp("--fat32nt", argv[argc])))
+	 *piBr = FAT32NT_BR;
       else if(( ! strcmp("-3", argv[argc])) ||
 	      ( ! strcmp("--fat32", argv[argc])))
 	 *piBr = FAT32_BR;
       else if(( ! strcmp("-f", argv[argc])) ||
 	      ( ! strcmp("--force", argv[argc])))
 	 *pbForce = 1;
+      else if(( ! strcmp("-k", argv[argc])) ||
+	      ( ! strcmp("--keeplabel", argv[argc])))
+	 *pbKeepLabel = 1;
       else if(( ! strcmp("-m", argv[argc])) ||
 	      ( ! strcmp("--mbr", argv[argc])))
 	 *piBr = MBR;

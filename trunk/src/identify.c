@@ -142,7 +142,7 @@ int sanity_check(FILE *fp, const char *szPath, int iBr, int bPrintMessages)
 	       printf(_("%s does not seem to be a disk partition device,\n"),
 		      szPath);
 	       printf(
-		  _("use the switch -f to force writing of a FAT32 boot record\n"));
+		  _("use the switch -f to force writing of a FAT32 DOS boot record\n"));
 	    }
 	    return 0;
 	 }
@@ -153,7 +153,33 @@ int sanity_check(FILE *fp, const char *szPath, int iBr, int bPrintMessages)
 	       printf(_("%s does not seem to have a FAT32 file system,\n"),
 		      szPath);
 	       printf(
-		  _("use the switch -f to force writing of a FAT32 boot record\n"));
+		  _("use the switch -f to force writing of a FAT32 DOS boot record\n"));
+	    }
+	    return 0;
+	 }
+      }
+      break;
+      case FAT32NT_BR:
+      {
+	 if( ! bIsPartition )
+	 {
+	    if(bPrintMessages)
+	    {
+	       printf(_("%s does not seem to be a disk partition device,\n"),
+		      szPath);
+	       printf(
+		  _("use the switch -f to force writing of a FAT32 NT boot record\n"));
+	    }
+	    return 0;
+	 }
+	 if( ! is_fat_32_fs(fp))
+	 {
+	    if(bPrintMessages)
+	    {
+	       printf(_("%s does not seem to have a FAT32 file system,\n"),
+		      szPath);
+	       printf(
+		  _("use the switch -f to force writing of a FAT32 NT boot record\n"));
 	    }
 	    return 0;
 	 }
