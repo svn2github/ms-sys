@@ -6,6 +6,7 @@
 #include "br.h"
 #include "fat12.h"
 #include "fat32.h"
+#include "fat32nt.h"
 #include "nls.h"
 #include "identify.h"
 
@@ -223,16 +224,34 @@ void diagnose(FILE *fp, const char *szPath)
       if(entire_fat_32_br_matches(fp))
       {
 	 printf(
-	    _("it is exactly the kind of FAT32 boot record this program\n"));
+	  _("it is exactly the kind of FAT32 DOS boot record this program\n"));
 	 printf(
 	    _("would create with the switch -3 on a FAT32 partition.\n"));
       }
       else
       {
 	 printf(
-	    _("it seems to be a FAT32 boot record, but it differs from\n"));
+	   _("it seems to be a FAT32 DOS boot record, but it differs from\n"));
 	 printf(
 	    _("what this program would create with the switch -3 on a\n"));
+	 printf(_("FAT32 partition.\n"));
+      }
+   }
+   else if(is_fat_32_nt_br(fp))
+   {
+      if(entire_fat_32_nt_br_matches(fp))
+      {
+	 printf(
+	   _("it is exactly the kind of FAT32 NT boot record this program\n"));
+	 printf(
+	    _("would create with the switch -2 on a FAT32 partition.\n"));
+      }
+      else
+      {
+	 printf(
+	    _("it seems to be a FAT32 NT boot record, but it differs from\n"));
+	 printf(
+	    _("what this program would create with the switch -2 on a\n"));
 	 printf(_("FAT32 partition.\n"));
       }
    }
