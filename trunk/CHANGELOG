@@ -1,6 +1,6 @@
 Date       Version  Comment
 ---------------------------------------------------------------------------
-14/9 2003  1.1.0    DOS FAT16 boot record added
+20/9 2003  1.1.0    DOS FAT16 boot record added
                     NT FAT32 boot record added
 
 23/2 2003  1.0.2    Documentation update, man-page added
