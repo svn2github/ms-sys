@@ -94,7 +94,7 @@ mkisofs -b eltorito.img -c eltorito.cat -o cdimage.iso cd-files
 4. Documentation
 ----------------
 
-There are is a man-page for ms-sys, and you will get some help by typing:
+There is a man-page for ms-sys, and you will get some help by typing:
 
 ms-sys --help
 
