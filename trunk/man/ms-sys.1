@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH MS-SYS 1 "September 13, 2003"
+.TH MS-SYS 1 "February 16, 2004"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -41,7 +41,34 @@ Write a FAT32 partition DOS (Win9x) boot record to device.
 Write a FAT16 partition DOS (Win9x) boot record to device.
 .TP
 .B \-m, \-\-mbr
-Write a master boot record to device.
+Write a Windows 2000/XP/2003 master boot record to device.
+Does not change Windows Disk Signature (bytes 01b8-01bd).
+This MBR will boot certain partition types beyond cylinder 
+1024 using LBA addressing.
+.TP
+.B \-9, \-\-mbr95b
+Write a Windows 95B/98/98SE/ME master boot record to device.
+Does not change Windows Disk Signature (bytes 01b8-01bd) or 
+boot drive and time (bytes 00da-00df).
+This MBR will boot FAT-LBA partition types 0c and 0e beyond cylinder 
+1024 using LBA addressing.
+.TP
+.B \-d, \-\-mbrdos
+Write a DOS/Windows NT master boot record to device.
+Does not change Windows Disk Signature (bytes 01b8-01bd).
+This MBR will not boot beyond cylinder 1024 as it does not support 
+LBA addressing.
+.TP
+.B \-s, \-\-mbrsyslinux
+Write a public domain syslinux master boot record to device.
+Does not change Windows Disk Signature (bytes 01b8-01bd).
+This MBR will boot any partition types beyond cylinder 
+1024 using LBA addressing.
+.TP
+.B \-z, \-\-mbrzero
+Write an empty (zeroed, non-bootable) master boot record to device.
+Zeroes all bytes except the partition map and signature (bytes 01be-01ff). 
+Similar to the empty DOS partition table that fdisk creates.
 .TP
 .B \-w, \-\-write
 Write automatically selected boot record to device.

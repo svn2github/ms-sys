@@ -75,7 +75,11 @@ int sanity_check(FILE *fp, const char *szPath, int iBr, int bPrintMessages)
    int bIsPartition = is_partition(fp);
    switch(iBr)
    {
-      case MBR:
+      case MBR_2000:
+      case MBR_95B:
+      case MBR_DOS:
+      case MBR_SYSLINUX:
+      case MBR_ZERO:
       {
 	 if( ! bIsDiskDevice )
 	 {
@@ -299,9 +303,37 @@ void diagnose(FILE *fp, const char *szPath)
    else if(is_dos_mbr(fp))
    {
 	 printf(
-	    _("it is a Microsoft master boot record, like the one this\n"));
+	    _("it is a Microsoft DOS/NT/95A master boot record, like the one this\n"));
+	 printf(
+	    _("program creates with the switch -d on a hard disk device.\n"));
+   }
+   else if(is_95b_mbr(fp))
+   {
+	 printf(
+	    _("it is a Microsoft 95B/98/98SE/ME master boot record, like the one this\n"));
+	 printf(
+	    _("program creates with the switch -9 on a hard disk device.\n"));
+   }
+   else if(is_2000_mbr(fp))
+   {
+	 printf(
+	    _("it is a Microsoft 2000/XP/2003 master boot record, like the one this\n"));
 	 printf(
 	    _("program creates with the switch -m on a hard disk device.\n"));
+   }
+   else if(is_syslinux_mbr(fp))
+   {
+	 printf(
+	    _("it is a public domain syslinux master boot record, like the one this\n"));
+	 printf(
+	    _("program creates with the switch -s on a hard disk device.\n"));
+   }
+   else if(is_zero_mbr(fp))
+   {
+	 printf(
+	    _("it is a zeroed non-bootable master boot record, like the one this\n"));
+	 printf(
+	    _("program creates with the switch -z on a hard disk device.\n"));
    }
    else
       printf(_("it is an unknown boot record\n"));

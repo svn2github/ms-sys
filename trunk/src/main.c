@@ -10,7 +10,7 @@
 #include "identify.h"
 #include "nls.h"
 
-#define VERSION "1.1.1"
+#define VERSION "1.1.3alfa1"
 
 void print_help(const char *szCommand);
 void print_version(void);
@@ -64,14 +64,66 @@ int main(int argc, char **argv)
       case NO_WRITING:
 	 diagnose(fp, argv[argc-1]);
 	 break;
-      case MBR:
+      case MBR_2000:
       {
-	 if(write_mbr(fp))
-	    printf(_("master boot record successfully written to %s\n"),
+	 if(write_2000_mbr(fp))
+	    printf(_("Windows 2000/XP/2003 master boot record successfully written to %s\n"),
 		   argv[argc-1]);
 	 else
 	 {
-	    printf(_("Failed writing master boot record to %s\n"),
+	    printf(_("Failed writing Windows 2000/XP/2003 master boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }	    
+      }
+      break;
+      case MBR_95B:
+      {
+	 if(write_95b_mbr(fp))
+	    printf(_("Windows 95B/98/98SE/ME master boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing Windows 95B/98/98SE/ME master boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }	    
+      }
+      break;
+      case MBR_DOS:
+      {
+	 if(write_dos_mbr(fp))
+	    printf(_("DOS/Windows NT master boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing DOS/Windows NT master boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }	    
+      }
+      break;
+      case MBR_SYSLINUX:
+      {
+	 if(write_syslinux_mbr(fp))
+	    printf(_("Public domain syslinux master boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing public domain syslinux master boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }	    
+      }
+      break;
+      case MBR_ZERO:
+      {
+	 if(write_zero_mbr(fp))
+	    printf(_("Empty (zeroed) master boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing empty (zeroed) master boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
 	 }	    
@@ -153,10 +205,15 @@ void print_help(const char *szCommand)
    printf(_("    -f, --force     Force writing of boot record\n"));
    printf(_("    -h, --help      Display this help and exit\n"));
    printf(_("    -l, --wipelabel Reset partition disk label in boot record\n"));
-   printf(_("    -m, --mbr       Write a master boot record to device\n"));
+   printf(_("    -m, --mbr       Write a Windows 2000/XP/2003 master boot record to device\n"));
+   printf(_("    -9, --mbr95b    Write a Windows 95B/98/98SE/ME master boot record to device\n"));
+   printf(_("    -d, --mbrdos    Write a DOS/Windows NT master boot record to device\n"));
+   printf(_("    -s, --mbrsyslinux    Write a public domain syslinux master boot record to device\n"));
+   printf(_("    -z, --mbrzero   Write an empty (zeroed) master boot record to device\n"));
    printf(_("    -v, --version   Show program version\n"));
    printf(
-_("    -w, --write     Write automaticly selected boot record to device\n\n"));
+_("    -w, --write     Write automatically selected boot record to device\n\n"));
+   printf(_("    Default         Inspect current boot record\n"));
    printf(
       _("Warning: Writing the wrong kind of boot record to a device might\n"));
    printf(
@@ -214,7 +271,19 @@ int parse_switches(int argc, char **argv, int *piBr,
 	 *pbKeepLabel = 0;
       else if(( ! strcmp("-m", argv[argc])) ||
 	      ( ! strcmp("--mbr", argv[argc])))
-	 *piBr = MBR;
+	 *piBr = MBR_2000;
+      else if(( ! strcmp("-9", argv[argc])) ||
+	      ( ! strcmp("--mbr95b", argv[argc])))
+	 *piBr = MBR_95B;
+      else if(( ! strcmp("-d", argv[argc])) ||
+	      ( ! strcmp("--mbrdos", argv[argc])))
+	 *piBr = MBR_DOS;
+      else if(( ! strcmp("-s", argv[argc])) ||
+	      ( ! strcmp("--mbrsyslinux", argv[argc])))
+	 *piBr = MBR_SYSLINUX;
+      else if(( ! strcmp("-z", argv[argc])) ||
+	      ( ! strcmp("--mbrzero", argv[argc])))
+	 *piBr = MBR_ZERO;
       else if(( ! strcmp("-w", argv[argc])) ||
 	      ( ! strcmp("--write", argv[argc])))
 	 *piBr = AUTO_BR;
