@@ -23,6 +23,7 @@ tar -xzvf ms-sys*.tgz
 
 Step 2, compile:
 
+cd ms-sys
 make
 
 Step 3, become root and install
