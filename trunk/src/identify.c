@@ -5,6 +5,7 @@
 
 #include "br.h"
 #include "fat12.h"
+#include "fat16.h"
 #include "fat32.h"
 #include "fat32nt.h"
 #include "nls.h"
@@ -134,6 +135,32 @@ int sanity_check(FILE *fp, const char *szPath, int iBr, int bPrintMessages)
 	 }
       }
       break;
+      case FAT16_BR:
+      {
+	 if( ! bIsPartition )
+	 {
+	    if(bPrintMessages)
+	    {
+	       printf(_("%s does not seem to be a disk partition device,\n"),
+		      szPath);
+	       printf(
+		  _("use the switch -f to force writing of a FAT16 boot record\n"));
+	    }
+	    return 0;
+	 }
+	 if( ! is_fat_16_fs(fp))
+	 {
+	    if(bPrintMessages)
+	    {
+	       printf(_("%s does not seem to have a FAT16 file system,\n"),
+		      szPath);
+	       printf(
+		  _("use the switch -f to force writing of a FAT16 boot record\n"));
+	    }
+	    return 0;
+	 }
+      }
+      break;
       case FAT32_BR:
       {
 	 if( ! bIsPartition )
@@ -203,6 +230,8 @@ void diagnose(FILE *fp, const char *szPath)
 {
    if(is_fat_12_fs(fp))
       printf(_("%s has a FAT12 file system.\n"), szPath);
+   if(is_fat_16_fs(fp))
+      printf(_("%s has a FAT16 file system.\n"), szPath);
    if(is_fat_32_fs(fp))
       printf(_("%s has a FAT32 file system.\n"), szPath);
    if(is_br(fp))
@@ -218,6 +247,24 @@ void diagnose(FILE *fp, const char *szPath)
 	 _("it is exactly the kind of FAT12 boot record this program\n"));
       printf(
 	 _("would create with the switch -1 on a floppy.\n"));
+   }
+   else if(is_fat_16_br(fp))
+   {
+      if(entire_fat_16_br_matches(fp))
+      {
+	 printf(
+	    _("it is exactly the kind of FAT16 boot record this program\n"));
+	 printf(
+	    _("would create with the switch -6 on a FAT16 partition.\n"));
+      }
+      else
+      {
+	 printf(
+	    _("it seems to be a FAT16 boot record, but it differs from\n"));
+	 printf(
+	    _("what this program would create with the switch -6 on a\n"));
+	 printf(_("FAT16 partition.\n"));
+      }
    }
    else if(is_fat_32_br(fp))
    {
