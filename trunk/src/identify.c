@@ -1,6 +1,6 @@
 #include <linux/hdreg.h>
 #include <linux/fd.h>
-#include <linux/fs.h>
+#include <sys/mount.h>
 #include <sys/ioctl.h>
 
 #include "br.h"
