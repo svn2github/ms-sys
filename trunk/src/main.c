@@ -10,7 +10,7 @@
 #include "identify.h"
 #include "nls.h"
 
-#define VERSION "1.1.0"
+#define VERSION "1.1.0alfa7"
 
 void print_help(const char *szCommand);
 void print_version(void);
