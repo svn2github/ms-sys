@@ -3,7 +3,7 @@
 /* Ugly fix for compability with both older libc and newer kernels */
 #include <sys/mount.h>
 #ifndef BLKGETSIZE
-#include <linux/fd.h>
+#include <linux/fs.h>
 #endif
 /* end of ugly fix */
 #include <sys/ioctl.h>
