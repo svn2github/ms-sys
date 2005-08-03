@@ -249,7 +249,7 @@ void print_help(const char *szCommand)
    printf(
       _("    -l, --wipelabel Reset partition disk label in boot record\n"));
    printf(
-      _("    -p, --partition Write partition info (hidden sectors and drive id)\n"));
+      _("    -p, --partition Write partition info (hidden sectors, heads and drive id)\n"));
    printf(
       _("                    to boot record\n"));
    printf(
