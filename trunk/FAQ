@@ -7,5 +7,5 @@ A1: This is most likely because you are running ms-sys in a Linux environment
     has the switch -p which is supposed to fix the geometry information when
     the formatting program has failed writing this correctly, but also ms-sys
     will write the wrong information for the same reason. This is a known
-    problem described in the README which also contains a link to detailed
+    problem described in the README which also contains a link to a detailed
     description and a possible workaround for the problem.
