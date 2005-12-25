@@ -26,7 +26,7 @@ EXTRA_LDFLAGS =
 # Paths
 
 # Installation path
-PREFIX = /usr/local
+PREFIX ?= /usr/local
 BINDIR = $(PREFIX)/bin
 LOCALEDIR = $(PREFIX)/share/locale
 MANDIR = $(PREFIX)/man
