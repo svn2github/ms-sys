@@ -51,6 +51,18 @@ Write partition info (hidden sectors, heads and drive id) to boot
 record. This might be needed on some partitions depending on
 which program was used to create the file system.
 .TP
+.B \-7, \-\-mbr7
+Write a Windows 7 master boot record to device.
+Does not change Windows Disk Signature (bytes 01b8-01bd).
+This MBR will boot certain partition types beyond cylinder
+1024 using LBA addressing.
+.TP
+.B \-i, \-\-mbrvista
+Write a Windows Vista master boot record to device.
+Does not change Windows Disk Signature (bytes 01b8-01bd).
+This MBR will boot certain partition types beyond cylinder
+1024 using LBA addressing.
+.TP
 .B \-m, \-\-mbr
 Write a Windows 2000/XP/2003 master boot record to device.
 Does not change Windows Disk Signature (bytes 01b8-01bd).

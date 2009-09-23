@@ -63,6 +63,26 @@ int is_2000_mbr(FILE *fp)
       contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
 } /* is_2000_mbr */
 
+int is_vista_mbr(FILE *fp)
+{
+   #include "mbr_vista.h"
+   unsigned char aucRef[] = {0x55, 0xAA};
+
+   return
+      contains_data(fp, 0x0, mbr_vista_0x0, sizeof(mbr_vista_0x0)) &&
+      contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+} /* is_vista_mbr */
+
+int is_win7_mbr(FILE *fp)
+{
+   #include "mbr_win7.h"
+   unsigned char aucRef[] = {0x55, 0xAA};
+
+   return
+      contains_data(fp, 0x0, mbr_win7_0x0, sizeof(mbr_win7_0x0)) &&
+      contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+} /* is_win7_mbr */
+
 int is_syslinux_mbr(FILE *fp)
 {
    #include "mbr_syslinux.h"
@@ -112,6 +132,26 @@ int write_2000_mbr(FILE *fp)
       write_data(fp, 0x0, mbr_2000_0x0, sizeof(mbr_2000_0x0)) &&
       write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
 } /* write_2000_mbr */
+
+int write_vista_mbr(FILE *fp)
+{
+   #include "mbr_vista.h"
+   unsigned char aucRef[] = {0x55, 0xAA};
+
+   return
+      write_data(fp, 0x0, mbr_vista_0x0, sizeof(mbr_vista_0x0)) &&
+      write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+} /* write_vista_mbr */
+
+int write_win7_mbr(FILE *fp)
+{
+   #include "mbr_win7.h"
+   unsigned char aucRef[] = {0x55, 0xAA};
+
+   return
+      write_data(fp, 0x0, mbr_win7_0x0, sizeof(mbr_win7_0x0)) &&
+      write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+} /* write_win7_mbr */
 
 int write_syslinux_mbr(FILE *fp)
 {

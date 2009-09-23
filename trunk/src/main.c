@@ -13,7 +13,7 @@
 #include "nls.h"
 #include "partition_info.h"
 
-#define VERSION "2.1.3"
+#define VERSION "2.1.4"
 
 void print_help(const char *szCommand);
 void print_version(void);
@@ -110,6 +110,32 @@ int main(int argc, char **argv)
 	 }
 	 break;
       }
+      case MBR_WIN7:
+      {
+         if(write_win7_mbr(fp))
+            printf(_("Windows 7 master boot record successfully written to %s\n"),
+                   argv[argc-1]);
+         else
+         {
+            printf(_("Failed writing Windows 7 master boot record to %s\n"),
+                   argv[argc-1]);
+            iRet = 1;
+         }
+      }
+      break;
+      case MBR_VISTA:
+      {
+         if(write_vista_mbr(fp))
+            printf(_("Windows Vista master boot record successfully written to %s\n"),
+                   argv[argc-1]);
+         else
+         {
+            printf(_("Failed writing Windows Vista master boot record to %s\n"),
+                   argv[argc-1]);
+            iRet = 1;
+         }
+      }
+      break;
       case MBR_2000:
       {
 	 if(write_2000_mbr(fp))
@@ -285,6 +311,10 @@ void print_help(const char *szCommand)
    printf(
       _("                    to boot record\n"));
    printf(
+      _("    -7, --mbr7      Write a Windows 7 MBR to device\n"));
+   printf(
+      _("    -i, --mbrvista  Write a Windows Vista MBR to device\n"));
+   printf(
       _("    -m, --mbr       Write a Windows 2000/XP/2003 MBR to device\n"));
    printf(
       _("    -9, --mbr95b    Write a Windows 95B/98/98SE/ME MBR to device\n"));
@@ -313,7 +343,7 @@ void print_version(void)
 {
    printf(_("ms-sys version %s\n"), VERSION);
    printf(_("Written by Henrik Carlqvist (henca@users.SourceForge.net)\n\n"));
-   printf(_("Copyright (C) 2002 Free Software Foundation, Inc.\n"));
+   printf(_("Copyright (C) 2009 Free Software Foundation, Inc.\n"));
    printf(_("This is free software; see the source for copying conditions.  There is NO\n"));
    printf(_("warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"));
 } /* print_version */
@@ -362,6 +392,10 @@ int parse_switches(int argc, char **argv, int *piBr,
 	 *pbKeepLabel = 0;
       else if( ! strcmp("--partition", argv[argc]))
 	 *pbWritePartitionInfo = 1;
+      else if( ! strcmp("--mbr7", argv[argc]))
+         *piBr = MBR_WIN7;
+      else if( ! strcmp("--mbrvista", argv[argc]))
+         *piBr = MBR_VISTA;
       else if( ! strcmp("--mbr", argv[argc]))
 	 *piBr = MBR_2000;
       else if( ! strcmp("--mbr95b", argv[argc]))
@@ -409,6 +443,12 @@ int parse_switches(int argc, char **argv, int *piBr,
 	       case 'p':
 		  *pbWritePartitionInfo = 1;
 		  break;
+               case '7':
+                  *piBr = MBR_WIN7;
+                  break;
+               case 'i':
+                  *piBr = MBR_VISTA;
+                  break;
 	       case 'm':
 		  *piBr = MBR_2000;
 		  break;
