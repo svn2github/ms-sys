@@ -1,0 +1,562 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-09-23 20:05+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Henrik Carlqvist <henca@users.SourceForge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/file.c:14
+#, c-format
+msgid "Error: contains_data called with uiLen > %d,\n"
+msgstr "Fel: contains_data anropad med uiLen > %d,\n"
+
+#: src/file.c:16
+msgid "please increase MAX_DATA_LEN in file.h\n"
+msgstr "Öka MAX_DATA_LEN i file.h\n"
+
+#: src/identify.c:137
+#, c-format
+msgid "%s does not seem to be a disk device,\n"
+msgstr "%s tycks inte vara en diskenhet,\n"
+
+#: src/identify.c:139 src/identify.c:149 src/identify.c:159
+msgid "use the switch -f to force writing of a master boot record\n"
+msgstr "använd flaggan -f för att tvinga fram skrivandet av en master boot record\n"
+
+#: src/identify.c:147
+#, c-format
+msgid "%s seems to be a floppy disk device,\n"
+msgstr "%s tycks vara en diskettenhet,\n"
+
+#: src/identify.c:157
+#, c-format
+msgid "%s seems to be a disk partition device,\n"
+msgstr "%s tycks vara en diskpartitionsenhet,\n"
+
+#: src/identify.c:171
+#, c-format
+msgid "%s does not seem to be a floppy disk device,\n"
+msgstr "%s tycks inte vara någon diskettenhet,\n"
+
+#: src/identify.c:174 src/identify.c:185
+msgid "use the switch -f to force writing of a FAT12 boot record\n"
+msgstr "använd flaggan -f för att tvinga fram skrivandet av en FAT12 boot record\n"
+
+#: src/identify.c:182
+#, c-format
+msgid "%s does not seem to have a FAT12 file system,\n"
+msgstr "%s tycks inte ha något FAT12 filsystem,\n"
+
+#: src/identify.c:198 src/identify.c:226
+#, c-format
+msgid "%s does not seem to be a disk partition device,\n"
+msgstr "%s tycks inte vara någon diskpartitionsenhet,\n"
+
+#: src/identify.c:201 src/identify.c:212
+msgid "use the switch -f to force writing of a FAT16 boot record\n"
+msgstr "använd flaggan -f för att tvinga fram skrivandet av en FAT16 DOS boot record\n"
+
+#: src/identify.c:209
+#, c-format
+msgid "%s does not seem to have a FAT16 file system,\n"
+msgstr "%s tycks inte ha något FAT16 filsystem,\n"
+
+#: src/identify.c:229 src/identify.c:240
+msgid "use the switch -f to force writing of a FAT32 boot record\n"
+msgstr "använd flaggan -f för att tvinga fram skrivandet av en FAT32 boot record\n"
+
+#: src/identify.c:237
+#, c-format
+msgid "%s does not seem to have a FAT32 file system,\n"
+msgstr "%s tycks inte ha något FAT32 filsystem,\n"
+
+#: src/identify.c:250 src/main.c:284
+msgid "Whoops, internal error, unknown boot record\n"
+msgstr "Hoppsan, internt fel, okänd boot record\n"
+
+#: src/identify.c:262
+#, c-format
+msgid "%s has a FAT12 file system.\n"
+msgstr "%s har ett FAT12 filsystem.\n"
+
+#: src/identify.c:264
+#, c-format
+msgid "%s has a FAT16 file system.\n"
+msgstr "%s har ett FAT16 filsystem.\n"
+
+#: src/identify.c:266
+#, c-format
+msgid "%s has a FAT32 file system.\n"
+msgstr "%s har ett FAT32 filsystem.\n"
+
+#: src/identify.c:268
+#, c-format
+msgid "%s has an x86 boot sector,\n"
+msgstr "%s har en x86 boot sector,\n"
+
+#: src/identify.c:271
+#, c-format
+msgid "%s has no x86 boot sector\n"
+msgstr "%s har ingen x86 boot sector,\n"
+
+#: src/identify.c:277
+msgid "it is exactly the kind of FAT12 boot record this program\n"
+msgstr "det är precis en likadan FAT12 boot record som detta program\n"
+
+
+#: src/identify.c:279
+msgid "would create with the switch -1 on a floppy.\n"
+msgstr "skulle skriva med flaggan -1 på en diskett.\n"
+
+
+#: src/identify.c:286
+msgid "it is exactly the kind of FAT16 DOS boot record this program\n"
+msgstr "det är precis en likadan FAT16 DOS boot record som detta program\n"
+
+#: src/identify.c:288
+msgid "would create with the switch -6 on a FAT16 partition.\n"
+msgstr "skulle skriva med flaggan -6 på en FAT16 partition.\n"
+
+#: src/identify.c:293
+msgid "it is exactly the kind of FAT16 FreeDOS boot record this program\n"
+msgstr "det är precis en likadan FAT16 FreeDOS boot record som detta program\n"
+
+#: src/identify.c:295
+msgid "would create with the switch -5 on a FAT16 partition.\n"
+msgstr "skulle skriva med flaggan -5 på en FAT16 partition.\n"
+
+#: src/identify.c:300
+msgid "it is exactly the kind of FAT32 DOS boot record this program\n"
+msgstr "det är precis en likadan FAT32 DOS boot record som detta program\n"
+
+#: src/identify.c:302
+msgid "would create with the switch -3 on a FAT32 partition.\n"
+msgstr "skulle skriva med flaggan -3 på en FAT32 partition.\n"
+
+#: src/identify.c:307
+msgid "it is exactly the kind of FAT32 NT boot record this program\n"
+msgstr "det är precis en likadan FAT32 NT boot record som detta program\n"
+
+#: src/identify.c:309
+msgid "would create with the switch -2 on a FAT32 partition.\n"
+msgstr "skulle skriva med flaggan -2 på en FAT32 partition.\n"
+
+#: src/identify.c:314
+msgid "it is exactly the kind of FAT32 FreeDOS boot record this program\n"
+msgstr "det är precis en likadan FAT32 FreeDOS boot record som detta program\n"
+
+#: src/identify.c:316
+msgid "would create with the switch -4 on a FAT32 partition.\n"
+msgstr "skulle skriva med flaggan -4 på en FAT32 partition.\n"
+
+#: src/identify.c:321
+msgid "it seems to be a FAT16 or FAT32 boot record, but it\n"
+msgstr "det tycks vara en FAT16 eller FAT32 boot record, men\n"
+
+#: src/identify.c:323
+msgid "differs from what this program would create with the\n"
+msgstr "skiljer sig från vad detta program skulle skriva med\n"
+
+#: src/identify.c:324
+msgid "switch -6, -2 or -3 on a FAT16 or FAT32 partition.\n"
+msgstr "flaggan -6, -2 eller -3 på en FAT16 eller FAT32 partition.\n"
+
+#: src/identify.c:329
+msgid "it seems to be a LILO boot record, please use lilo to\n"
+msgstr "det tycks vara en LILO boot record, använd lilo för att\n"
+
+#: src/identify.c:330
+msgid "create such boot records.\n"
+msgstr "skapa en sådan boot record.\n"
+
+#: src/identify.c:335
+msgid "it is a Microsoft DOS/NT/95A master boot record, like the one this\n"
+msgstr "det är en Microsoft DOS/NT/95A master boot record, en sådan skapas\n"
+
+#: src/identify.c:337 src/identify.c:346
+msgid "program creates with the switch -d on a hard disk device.\n"
+msgstr "av detta program med flaggan -d på en hårddiskenhet.\n"
+
+#: src/identify.c:342
+msgid "it is a Microsoft DOS/NT/95A master boot record with the undocumented\n"
+msgstr "det är en Microsoft DOS/NT/95A master boot record med den odokumenterade\n"
+
+#: src/identify.c:344
+msgid "F2 instruction. You will get equal functionality with the MBR this\n"
+msgstr "F2 instruktionen. Du får motsvarande funktionalitet\n"
+
+#: src/identify.c:351
+msgid ""
+"it is a Microsoft 95B/98/98SE/ME master boot record, like the one this\n"
+msgstr "det är en Microsoft 95B/98/98SE/ME master boot record, en sådan skapas\n"
+
+#: src/identify.c:353
+msgid "program creates with the switch -9 on a hard disk device.\n"
+msgstr "av detta program med flaggan -9 på en hårddiskenhet.\n"
+
+#: src/identify.c:358
+msgid "it is a Microsoft 2000/XP/2003 master boot record, like the one this\n"
+msgstr "det är en Microsoft 2000/XP/2003 master boot record, en sådan skapas\n"
+
+#: src/identify.c:360
+msgid "program creates with the switch -m on a hard disk device.\n"
+msgstr "av detta program med flaggan -m på en hårddiskenhet.\n"
+
+#: src/identify.c:365
+msgid "it is a Microsoft Vista master boot record, like the one this\n"
+msgstr "det är en Microsoft Vista master boot record, en sådan skapas\n"
+
+#: src/identify.c:367
+msgid "program creates with the switch -i on a hard disk device.\n"
+msgstr "av detta program med flaggan -i på en hårddiskenhet.\n"
+
+#: src/identify.c:372
+msgid "it is a Microsoft 7 master boot record, like the one this\n"
+msgstr "det är en Microsoft Windows 7 master boot record, en sådan skapas\n"
+
+#: src/identify.c:374
+msgid "program creates with the switch -7 on a hard disk device.\n"
+msgstr "av detta program med flaggan -7 på en hårddiskenhet.\n"
+
+#: src/identify.c:379
+msgid "it is a public domain syslinux master boot record, like the one this\n"
+msgstr "det är en fri syslinux master boot record, en sådan skapas\n"
+
+#: src/identify.c:381
+msgid "program creates with the switch -s on a hard disk device.\n"
+msgstr "av detta program med flaggan -s på en hårddiskenhet.\n"
+
+#: src/identify.c:386
+msgid "it is a zeroed non-bootable master boot record, like the one this\n"
+msgstr "det är en nollställd, icke-bootbar master boot record, en sådan skapas\n"
+
+#: src/identify.c:388
+msgid "program creates with the switch -z on a hard disk device.\n"
+msgstr "av detta program med flaggan -z på en hårddiskenhet.\n"
+
+#: src/identify.c:391
+msgid "it is an unknown boot record\n"
+msgstr "det är en okänd boot record\n"
+
+#: src/main.c:50
+#, c-format
+msgid "Unable to open %s, %s\n"
+msgstr "Kunde inte öppna %s, %s\n"
+
+#: src/main.c:57
+#, c-format
+msgid "Unable to automaticly select boot record for %s\n"
+msgstr "Kunde inte automatiskt välja typ av boot record till %s\n"
+
+#: src/main.c:72
+#, c-format
+msgid "Start sector (nr of hidden sectors) successfully written to %s\n"
+msgstr "Startsektor (antal dolda sektorer) skrevs till %s\n"
+
+#: src/main.c:76
+#, c-format
+msgid "Physical disk drive id 0x80 (C:) successfully written to %s\n"
+msgstr "Fysisk disk id 0x80 (C:) skrevs till %s\n"
+
+#: src/main.c:80
+#, c-format
+msgid "Number of heads successfully written to %s\n"
+msgstr "Antal huvud skrevs till %s\n"
+
+#: src/main.c:85
+#, c-format
+msgid "Failed writing number of heads to %s\n"
+msgstr "Misslyckades med att skriva antal huvud till %s\n"
+
+#: src/main.c:91
+#, c-format
+msgid "Failed writing physical disk drive id to %s\n"
+msgstr "Misslyckades med att skriva fysisk disk id till %s\n"
+
+#: src/main.c:97
+#, c-format
+msgid "Failed writing start sector to %s, this is only possible to do with\n"
+msgstr "Misslyckades med att skriva startsektor till %s, det är bara möjligt med\n"
+
+#: src/main.c:99
+msgid "real partitions!\n"
+msgstr "riktiga partitioner!\n"
+
+#: src/main.c:116
+#, c-format
+msgid "Windows 7 master boot record successfully written to %s\n"
+msgstr "Windows 7 master boot record skrevs till %s\n"
+
+#: src/main.c:116
+#, c-format
+msgid "Windows 2000/XP/2003 master boot record successfully written to %s\n"
+msgstr "Windows 2000/XP/2003 master boot record skrevs till %s\n"
+
+#: src/main.c:120
+#, c-format
+msgid "Failed writing Windows 7 master boot record to %s\n"
+msgstr "Misslyckades med att skriva Windows 7 master boot record till %s\n"
+
+#: src/main.c:120
+#, c-format
+msgid "Failed writing Windows 2000/XP/2003 master boot record to %s\n"
+msgstr "Misslyckades med att skriva Win 2000/XP/2003 master boot record till %s\n"
+
+#: src/main.c:129
+#, c-format
+msgid "Windows Vista master boot record successfully written to %s\n"
+msgstr "Windows Vista master boot record skrevs till %s\n"
+
+#: src/main.c:133
+#, c-format
+msgid "Failed writing Windows Vista master boot record to %s\n"
+msgstr "Misslyckades med att skriva Windows Vista master boot record till %s\n"
+#: src/main.c:129
+#, c-format
+msgid "Windows 95B/98/98SE/ME master boot record successfully written to %s\n"
+msgstr "Windows 95B/98/98SE/ME master boot record skrevs till %s\n"
+
+#: src/main.c:159
+#, c-format
+msgid "Failed writing Windows 95B/98/98SE/ME master boot record to %s\n"
+msgstr "Misslyckades med att skriva Win 95B/98/98SE/ME master boot record till %s\n"
+
+#: src/main.c:168
+#, c-format
+msgid "DOS/Windows NT master boot record successfully written to %s\n"
+msgstr "DOS/Windows NT master boot record skrevs till %s\n"
+
+#: src/main.c:172
+#, c-format
+msgid "Failed writing DOS/Windows NT master boot record to %s\n"
+msgstr "Misslyckades med att skriva DOS/Windows NT boot record till %s\n"
+
+#: src/main.c:181
+#, c-format
+msgid "Public domain syslinux master boot record successfully written to %s\n"
+msgstr "Fri syslinux master boot record skrevs till %s\n"
+
+#: src/main.c:185
+#, c-format
+msgid "Failed writing public domain syslinux master boot record to %s\n"
+msgstr "Misslyckades med att skriva fri syslinux boot record till %s\n"
+
+#: src/main.c:194
+#, c-format
+msgid "Empty (zeroed) master boot record successfully written to %s\n"
+msgstr "Tom (nollställd) master boot record skrevs till %s\n"
+
+#: src/main.c:198
+#, c-format
+msgid "Failed writing empty (zeroed) master boot record to %s\n"
+msgstr "Misslyckades med att skriva tom (nollställd) boot record till %s\n"
+
+#: src/main.c:207
+#, c-format
+msgid "FAT12 boot record successfully written to %s\n"
+msgstr "FAT12 boot record skrevs till %s\n"
+
+#: src/main.c:211
+#, c-format
+msgid "Failed writing FAT12 boot record to %s\n"
+msgstr "Misslyckades med att skriva FAT12 boot record till %s\n"
+
+#: src/main.c:220
+#, c-format
+msgid "FAT16 boot record successfully written to %s\n"
+msgstr "FAT16 DOS boot record skrevs till %s\n"
+
+#: src/main.c:224
+#, c-format
+msgid "Failed writing FAT16 boot record to %s\n"
+msgstr "Misslyckades med att skriva FAT16 DOS boot record till %s\n"
+
+#: src/main.c:233
+#, c-format
+msgid "FAT16 FreeDOS boot record successfully written to %s\n"
+msgstr "FAT16 FreeDOS boot record skrevs till %s\n"
+
+#: src/main.c:237
+#, c-format
+msgid "Failed writing FAT16 FreeDOS boot record to %s\n"
+msgstr "Misslyckades med att skriva FAT16 FreeDOS boot record till %s\n"
+
+#: src/main.c:246
+#, c-format
+msgid "FAT32 NT boot record successfully written to %s\n"
+msgstr "FAT32 NT boot record skrevs till %s\n"
+
+#: src/main.c:250
+#, c-format
+msgid "Failed writing FAT32 NT boot record to %s\n"
+msgstr "Misslyckades med att skriva FAT32 NT boot record till %s\n"
+
+#: src/main.c:259
+#, c-format
+msgid "FAT32 FreeDOS boot record successfully written to %s\n"
+msgstr "FAT32 FreeDOS boot record skrevs till %s\n"
+
+#: src/main.c:263
+#, c-format
+msgid "Failed writing FAT32 FreeDOS boot record to %s\n"
+msgstr "Misslyckades med att skriva FAT32 FreeDOS boot record till %s\n"
+
+#: src/main.c:272
+#, c-format
+msgid "FAT32 DOS boot record successfully written to %s\n"
+msgstr "FAT32 DOS boot record skrevs till %s\n"
+
+#: src/main.c:276
+#, c-format
+msgid "Failed writing FAT32 DOS boot record to %s\n"
+msgstr "Misslyckades med att skriva FAT32 DOS boot record till %s\n"
+
+#: src/main.c:294
+#, c-format
+msgid ""
+"Usage:\n"
+"\t%s [options] [device]\n"
+"Options:\n"
+msgstr ""
+"Användning:\n"
+"\t%s [flaggor] [enhet]\n"
+"Flaggor:\n"
+
+#: src/main.c:296
+msgid "    -1, --fat12     Write a FAT12 floppy boot record to device\n"
+msgstr "    -1, --fat12     Skriv en FAT12 diskett boot record till enheten\n"
+
+#: src/main.c:298
+msgid "    -2, --fat32nt   Write a FAT32 partition NT boot record to device\n"
+msgstr "    -2, --fat32nt   Skriv en FAT32 partition NT boot record till enheten\n"
+
+#: src/main.c:300
+msgid "    -3, --fat32     Write a FAT32 partition DOS boot record to device\n"
+msgstr "    -3, --fat32     Skriv en FAT32 partition DOS boot record till enheten\n"
+
+#: src/main.c:302
+msgid ""
+"    -4, --fat32free Write a FAT32 partition FreeDOS boot record to device\n"
+msgstr "    -4, --fat32free Skriv en FAT32 partition FreeDOS boot record till enheten\n"
+
+#: src/main.c:304
+msgid ""
+"    -5, --fat16free Write a FAT16 partition FreeDOS boot record to device\n"
+msgstr "    -5, --fat16free Skriv en FAT16 partition FreeDOS boot record till enheten\n"
+
+#: src/main.c:306
+msgid "    -6, --fat16     Write a FAT16 partition DOS boot record to device\n"
+msgstr "    -6, --fat16     Skriv en FAT16 partition DOS boot record till enheten\n"
+
+#: src/main.c:308
+msgid "    -l, --wipelabel Reset partition disk label in boot record\n"
+msgstr "    -l, --wipelabel Nollställ volymens etikett i boot record\n"
+
+#: src/main.c:310
+msgid ""
+"    -p, --partition Write partition info (hidden sectors, heads and drive "
+"id)\n"
+msgstr "    -p, --partition Skriv partitionsdata (dolda sektorer, antal huvud "
+"och\n"
+
+#: src/main.c:312
+msgid "                    to boot record\n"
+msgstr "                    drive id) till partitionens boot record\n"
+
+#: src/main.c:288
+msgid "    -m, --mbr       Write a Windows 2000/XP/2003 MBR to device\n"
+msgstr "    -m, --mbr       Skriv en Windows 2000/XP/2003 MBR till enheten\n"
+
+#: src/main.c:320
+msgid "    -9, --mbr95b    Write a Windows 95B/98/98SE/ME MBR to device\n"
+msgstr "    -9, --mbr95b    Skriv en Windows 95B/98/98SE/ME MBR till enheten\n"
+
+#: src/main.c:322
+msgid "    -d, --mbrdos    Write a DOS/Windows NT MBR to device\n"
+msgstr "    -d, --mbrdos    Skriv en DOS/Windows NT MBR till enheten\n"
+
+#: src/main.c:324
+msgid "    -s, --mbrsyslinux    Write a public domain syslinux MBR to device\n"
+msgstr "    -s, --mbrsyslinux    Skriv en public domain syslinux MBR till enheten\n"
+
+#: src/main.c:326
+msgid "    -z, --mbrzero   Write an empty (zeroed) MBR to device\n"
+msgstr "    -z, --mbrzero   Skriv en empty (zeroed) MBR till enheten\n"
+
+#: src/main.c:328
+msgid "    -f, --force     Force writing of boot record\n"
+msgstr "    -f, --force     Tvinga skrivande av boot record\n"
+
+#: src/main.c:330
+msgid "    -h, --help      Display this help and exit\n"
+msgstr "    -h, --help      Visa denna hjälp och avsluta\n"
+
+#: src/main.c:332
+msgid "    -v, --version   Show program version\n"
+msgstr "    -v, --version   Visa versionsinformation\n"
+
+#: src/main.c:334
+msgid ""
+"    -w, --write     Write automatically selected boot record to device\n"
+"\n"
+msgstr ""
+"    -w, --write     Skriv automatiskt vald boot record till enheten\n"
+"\n"
+
+#: src/main.c:335
+msgid ""
+"    Default         Inspect current boot record\n"
+"\n"
+msgstr "    Om inga flaggor ges görs en enkel diagnos av boot record\n\n"
+
+#: src/main.c:337
+msgid "Warning: Writing the wrong kind of boot record to a device might\n"
+msgstr "Varning: Skrivande av fel typ av boot record till en enhet kan\n"
+
+#: src/main.c:339
+msgid ""
+"destroy partition information or file system!\n"
+"\n"
+msgstr ""
+"förstöra partitionsinformation eller filsystem!\n"
+"\n"
+
+#: src/main.c:344
+#, c-format
+#msgid "ms-sys version %s\n"
+#msgstr ""
+
+#: src/main.c:345
+msgid ""
+"Written by Henrik Carlqvist (henca@users.SourceForge.net)\n"
+"\n"
+msgstr ""
+"Skriven av Henrik Carlqvist (henca@users.SourceForge.net)\n"
+"\n"
+
+#: src/main.c:346
+msgid "Copyright (C) 2009 Free Software Foundation, Inc.\n"
+msgstr ""
+
+#: src/main.c:317
+msgid ""
+"This is free software; see the source for copying conditions.  There is NO\n"
+msgstr ""
+"Detta är fri programvara, se kopieringsvillkoren i källkoden.\n"
+
+#: src/main.c:348
+msgid ""
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+"\n"
+msgstr ""
+"Denna programvara har inga garantier.\n"
+"\n"
+
