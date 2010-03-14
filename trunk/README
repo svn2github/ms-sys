@@ -121,9 +121,10 @@ parted together with Linux kernel 2.6. The problem is that kernel 2.6 might
 report a geometry incompatible with other operating systems. There is a
 detailed description of the problem at
 http://groups-beta.google.com/group/linux.kernel/msg/404d8683ce302cf2
-As a workaround for this ms-sys now has the switch -H to manually set the number of
-heads. The next problem is to find out what value for number of heads to give. If
-the system was booted by LILO this can be shown by "lilo -T geom".
+As a workaround for this ms-sys now has the switch -H to manually set the
+number of heads. The next problem is to find out what value for number of
+heads to give. If the system was booted by LILO this can be shown by
+"lilo -T geom".
 
 There have been reports about problems when compiling against uClibc. More
 problem reports or suggestions of fixes are welcome!
