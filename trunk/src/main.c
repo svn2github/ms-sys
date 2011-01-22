@@ -31,7 +31,7 @@
 #include "nls.h"
 #include "partition_info.h"
 
-#define VERSION "2.2.0"
+#define VERSION "2.2.1"
 
 void print_help(const char *szCommand);
 void print_version(void);
