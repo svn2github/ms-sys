@@ -87,6 +87,14 @@ int main(int argc, char **argv)
    }
    if( bWritePartitionInfo )
    {
+      if( !iBr && !bForce)
+      {
+	 if( ! sanity_check(fp, argv[argc-1], FAT32_BR, 1) )
+	 {
+	    fclose(fp);
+	    return 1;
+	 }
+      }
       if( write_partition_start_sector_number(fp) )
       {
 	 printf(_("Start sector %ld (nr of hidden sectors) successfully written to %s\n"),
