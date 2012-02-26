@@ -1,5 +1,7 @@
 Date       Version  Comment
 ---------------------------------------------------------------------------
+??/?  2012 2.3.0    Added experimental support for NTFS boot record
+
 22/1  2011 2.2.1    Modified Makefile to recreate directories lost by CVS
                     Now also doing a sanity check before only writing BPB
 
