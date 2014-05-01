@@ -87,7 +87,7 @@ msgstr "%s tycks inte ha något FAT32 filsystem,\n"
 #: src/identify.c:274 src/identify.c:285
 #, c-format
 msgid "use the switch -f to force writing of a NTFS boot record\n"
-msgstr "använd flaggan -f för att tvinga fram skrivandet av en NTFS boot record"
+msgstr "använd flaggan -f för att tvinga fram skrivandet av en NTFS boot record\n"
 
 #: src/identify.c:282
 #, c-format
