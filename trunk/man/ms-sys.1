@@ -96,6 +96,10 @@ Does not change Windows Disk Signature (bytes 01b8-01bd).
 This MBR will boot any partition types beyond cylinder 
 1024 using LBA addressing.
 .TP
+.B \-t, \-\-mbrgptsyslinux
+Write a GPL syslinux GPT MBR to device.
+This MBR will boot from a GPT partition table.
+.TP
 .B \-z, \-\-mbrzero
 Write an empty (zeroed, non-bootable) master boot record to device.
 Zeroes all bytes except the partition map and signature (bytes 01be-01ff). 
