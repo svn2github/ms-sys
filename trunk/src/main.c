@@ -209,11 +209,11 @@ int main(int argc, char **argv)
       case MBR_SYSLINUX:
       {
 	 if(write_syslinux_mbr(fp))
-	    printf(_("Public domain syslinux master boot record successfully written to %s\n"),
+	    printf(_("Syslinux master boot record successfully written to %s\n"),
 		   argv[argc-1]);
 	 else
 	 {
-	    printf(_("Failed writing public domain syslinux master boot record to %s\n"),
+	    printf(_("Failed writing syslinux master boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
 	 }	    
@@ -382,9 +382,9 @@ void print_help(const char *szCommand)
    printf(
       _("    -d, --mbrdos    Write a DOS/Windows NT MBR to device\n"));
    printf(
-      _("    -s, --mbrsyslinux    Write a public domain syslinux MBR to device\n"));
+      _("    -s, --mbrsyslinux    Write a syslinux MBR to device\n"));
    printf(
-      _("    -t, --mbrgptsyslinux Write a GPL syslinux GPT MBR to device\n"));
+      _("    -t, --mbrgptsyslinux Write a syslinux GPT MBR to device\n"));
    printf(
       _("    -z, --mbrzero   Write an empty (zeroed) MBR to device\n"));
    printf(

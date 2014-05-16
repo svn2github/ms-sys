@@ -417,13 +417,13 @@ msgstr "Misslyckades med att skriva DOS/Windows NT boot record till %s\n"
 
 #: src/main.c:212
 #, c-format
-msgid "Public domain syslinux master boot record successfully written to %s\n"
-msgstr "Fri syslinux master boot record skrevs till %s\n"
+msgid "Syslinux master boot record successfully written to %s\n"
+msgstr "Syslinux master boot record skrevs till %s\n"
 
 #: src/main.c:216
 #, c-format
-msgid "Failed writing public domain syslinux master boot record to %s\n"
-msgstr "Misslyckades med att skriva fri syslinux boot record till %s\n"
+msgid "Failed writing syslinux master boot record to %s\n"
+msgstr "Misslyckades med att skriva syslinux boot record till %s\n"
 
 #: src/main.c:225
 #, c-format
@@ -617,13 +617,13 @@ msgstr "    -d, --mbrdos    Skriv en DOS/Windows NT MBR till enheten\n"
 
 #: src/main.c:385
 #, c-format
-msgid "    -s, --mbrsyslinux    Write a public domain syslinux MBR to device\n"
-msgstr "    -s, --mbrsyslinux    Skriv en public domain syslinux MBR till enheten\n"
+msgid "    -s, --mbrsyslinux    Write a syslinux MBR to device\n"
+msgstr "    -s, --mbrsyslinux    Skriv en syslinux MBR till enheten\n"
 
 #: src/main.c:387
 #, c-format
-msgid "    -t, --mbrgptsyslinux Write a GPL syslinux GPT MBR to device\n"
-msgstr "    -t, --mbrgptsyslinux Skriv en GPL syslinux GPT MBR till enheten\n"
+msgid "    -t, --mbrgptsyslinux Write a syslinux GPT MBR to device\n"
+msgstr "    -t, --mbrgptsyslinux Skriv en syslinux GPT MBR till enheten\n"
 
 #: src/main.c:389
 #, c-format
@@ -694,7 +694,7 @@ msgstr ""
 msgid "Copyright (C) 2009 Free Software Foundation, Inc.\n"
 msgstr ""
 
-#: src/main.c:371
+#: src/main.c:410
 #, c-format
 msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
