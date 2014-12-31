@@ -498,7 +498,7 @@ msgstr "FAT32 PE boot record skrevs till %s\n"
 #: src/main.c:308
 #, c-format
 msgid "Failed writing FAT32 PE boot record to %s\n"
-msgstr "Misslyckades med att skriva FAT32 PE boot record till %s\n""
+msgstr "Misslyckades med att skriva FAT32 PE boot record till %s\n"
 
 #: src/main.c:317
 #, c-format
