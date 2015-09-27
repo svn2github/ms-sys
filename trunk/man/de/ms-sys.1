@@ -1,0 +1,246 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH MS-SYS 1 "September 27, 2015"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH "BEZEICHNUNG"
+ms-sys \- schreibt einen Microsoft Bootblock
+.SH "ÜBERSICHT"
+.B ms-sys
+.RI "[Optionen] [Gerät]"
+.SH "BESCHREIBUNG"
+\fBms-sys\fP ist für das Schreiben von Microsoft kompatiblen Bootrecords.
+.SH "OPTIONEN"
+Eine Zusammenfassung der Optionen ist unten aufgeführt.
+.TP
+.B \-1, \-\-fat12
+Schreibt einen FAT12 Disketten Bootrecord aufs Gerät.
+.TP
+.B \-2, \-\-fat32nt
+Schreibt einen FAT32 Partition NT Bootrecord aufs Gerät.
+.TP
+.B \-e, \-\-fat32pe
+Schreibt einen FAT32 Partition PE Bootrecord aufs Gerät, 
+für USB Installation und Wiederherstellung.
+.TP
+.B \-3, \-\-fat32
+Schreibt einen FAT32 Partition DOS (Win9x) Bootrecord aufs Gerät, 
+.TP
+.B \-4, \-\-fat32free
+Schreibt einen FAT32 Partition FreeDOS Bootrecord aufs Gerät, 
+.TP
+.B \-5, \-\-fat16free
+Schreibt einen FAT16 Partition  Bootrecord aufs Gerät, 
+.TP
+.B \-6, \-\-fat16
+Schreibt einen FAT16 Partition DOS (Win9x) Bootrecord aufs Gerät, 
+.TP
+.B \-n, \-\-ntfs
+Schreibt einen NTFS Partition Windows 7 Bootrecord aufs Gerät.
+Diese Funktionalität sollte als experimentell angesehen werden und 
+ist wahrscheinlich von keinem praktischen Nutzen.
+.TP
+.B \-l, \-\-wipelabel
+Entfernt Volumenlabel im Bootrecord.
+.TP
+.B \-p, \-\-partition
+.\" wrong hyphenation Laufwerkskennung
+Schreibt Partitions-Info (versteckte Sektoren, Köpfe und 
+Laufwerkskennung) in Bootrecord.
+Dies könnte auf einigen Partitionen erforderlich sein, je nach 
+verwendetem Programm, mit dem das Dateisystem erstellt wurde.
+.TP
+.B \-H <n>, \-\-heads <n>
+Anzahl der Köpfe, wenn -p Option verwendet wird.
+.TP
+.B \-7, \-\-mbr7
+Schreibt einen Windows 7 Master-Bootrecord aufs Gerät.
+Dies ändert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
+Dieser MBR wird bestimmte Partitionstypen jenseits der Zylindergrenze 
+1024 booten mittels LBA-Adressierung.
+.TP
+.B \-i, \-\-mbrvista
+Schreibt einen Windows Vista Master-Bootrecord aufs Gerät.
+Dies ändert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
+Dieser MBR wird bestimmte Partitionstypen jenseits der Zylindergrenze 
+1024 booten mittels LBA-Adressierung.
+.TP
+.B \-m, \-\-mbr
+Schreibt einen Windows 2000/XP/2003 Master-Bootrecord aufs Gerät.
+Dies ändert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
+Dieser MBR wird bestimmte Partitionstypen jenseits der Zylindergrenze 
+1024 booten mittels LBA-Adressierung.
+.TP
+.B \-9, \-\-mbr95b
+Schreibt einen Windows 95B/98/98SE/ME Master-Bootrecord aufs Gerät.
+Dies ändert weder die Windows Platten-Signatur (Bytes 01b8-01bd) noch
+das Boot-Laufwerk und die Zeit (Bytes 00da-00df).
+Dieser MBR wird Partitionstypen 0c and 0e jenseits der Zylindergrenze 
+1024 booten mittels LBA-Adressierung.
+.TP
+.B \-d, \-\-mbrdos
+Schreibt einen DOS/Windows NT Master-Bootrecord aufs Gerät.
+Dies ändert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
+Dieser MBR wird nicht jenseits der Zylindergrenze 1024 booten 
+da er die LBA-Adressierung nicht unterstützt.
+.TP
+.B \-s, \-\-mbrsyslinux
+Schreibt einen Syslinux Master-Bootrecord aufs Gerät.
+Dies ändert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
+Dieser MBR wird jeden Partitionstypen jenseits der Zylindergrenze 
+1024 booten mittels LBA-Adressierung.
+.TP
+.B \-t, \-\-mbrgptsyslinux
+Schreibt einen GPL Syslinux GPT Master-Bootrecord aufs Gerät.
+Dieser MBR wird booten von einer GUID-Partitionstabelle.
+.TP
+.B \-z, \-\-mbrzero
+Schreibt einen leeren (augenullten, nicht startbaren) Master-Bootrecord aufs Gerät.
+Nullt alle Bytes mit Ausnahme der Partitionstabelle und
+der Windows Platten-Signatur (Bytes 01BE-01FF).
+Ähnlich wie ein leere DOS-Partitionstabelle, die fdisk erstellt.
+.TP
+.B \-f, \-\-force
+Schreiben des Bootrecords erzwingen.
+.TP
+.B \-h, \-\-help
+Zeigt Zusammenfassung der Optionen.
+.TP
+.B \-v, \-\-version
+Zeigt Programmversion.
+.TP
+.B \-w, \-\-write
+Schreibt automatisch gewählten Bootrecord aufs Gerät.
+.P
+ms-sys ohne Optionen wird eine einfache Diagnose an 
+dem angegebenen Gerät durchführen.
+.br
+.SH "BEISPIELE"
+.P
+Bitte beachten Sie, dass Windows ME nicht sinnvoll für die Herstellung von
+eigenständig bootfähigen Disketten ist. 
+Win9x und DOS jedoch funktionieren gut mit den ersten beiden Beispielen.
+.P
+.B Erstellen einer bootfähigen 1,68 MB Diskette 
+.TP
+Dieses Beispiel geht davon aus, dass Sie Ihre Windows-Installation in /dosc eingehängt haben und
+auch mtools und fdformat installiert sind.
+.P
+fdformat /dev/fd0u1680
+.br
+mformat a:
+.br
+ms-sys -w /dev/fd0
+.br
+mcopy /dosc/io.sys a:
+.br
+mcopy /dosc/msdos.sys a:
+.br
+mcopy /dosc/command.com a:
+.P
+.B Erstellen eines bootfähigen 2.8 MB Disketten-Abbilds für eine El-Torito bootfähige CD.
+.P
+dd if=/dev/zero of=floppy288.img bs=1024 count=2880
+.br
+/sbin/mkdosfs floppy288.img
+.br
+ms-sys -1 -f floppy288.img
+.br
+su
+.br
+mount -o loop floppy288.img /mnt
+.br
+cp msdos.sys /mnt/
+.br
+cp io.sys /mnt/
+.br
+cp command.com /mnt/
+.br
+(es könnte auch eine gute Idee sein, eine config.sys und autoexec.bat mit CD-ROM-Unterstützung hinzufügen)
+.br
+umount /mnt
+.br
+exit
+.br
+cp floppy288.img cd-files/boot.img
+.br
+mkisofs -b boot.img -c boot.cat -o cdimage.iso cd\-files
+.br
+(Brennen Sie die Datei cdimage.iso auf CD mit cdrecord oder einem anderen Programm)
+.P
+.B  Wiederherstellen einer Sicherung von Win9x oder Win ME auf einer neuen Festplatte
+.P
+Schritt 1, verwenden sie GNU parted um ihr FAT32-Partition und Dateisystem zu erstellen:
+.P
+parted (dann FAT32-Partition und Dateisystem erstellen)
+.P
+Schritt 2, schreiben des MBR:
+.P
+ms-sys -w /dev/hda
+.P
+Schritt 3, schreiben des FAT32 Partition Bootrecords:
+.P
+ms-sys -w /dev/hda1
+.P
+Schritt 4, einhängen des neuen Dateisystems:
+.P
+mount /dev/hda1 /mnt
+.P
+Schritt 5, Wiederherstellen ihres Backups
+.P
+cd /mnt; tar -xzvf /path/to/my_windows_backup_file.tgz
+.br
+.SH "UMGEBUNG"
+Die Variablen LANG und LC_ALL haben die übliche Bedeutung,
+aber es sind nicht viele Übersetzungen vorhanden.
+.br
+.SH "FEHLER"
+Es gab Berichte über nicht mehr bootbare FAT32-Partitionen erstellt mit
+"mformat -F C:". Das Problem wurde auch auf für Partitionen gemeldet,
+die mit mkdosfs und mkfs.vfat formatiert wurden. Eine Abhilfe ist, 
+statt dessen GNU parted zu verwenden um die Partition zu erstellen.
+Seit der Version 1.1.3 ms-sys hat den Schalter \-p, der dieses Problem beheben soll. 
+Leider funktioniert mit Linux Kernel 2.6 weder die Option \-p noch GNU parted.
+Eine einfache Abhilfe ist, ms-sys mit Linux Kernel 2.4 zu verwenden. 
+Eine andere mögliche Problemumgehung ist es, die Anzahl der Köpfe mit dem Schalter -H manuell einzustellen. 
+Wenn das System von LILO gebootet wurde, kann die korrekte Anzahl der Köpfe
+durch "lilo -T geom" ermittelt werden.
+.P
+Das Schreiben von NTFS Partition-Bootrecords hat wohl keinen praktischen Nutzen.
+Für Windows 7 wurde berichtet, dass das Ausführen von "sysprep", 
+bevor Sie ein Abbild einer NTFS-Partition erstellen,
+die aus diesem wiederhergestellte Partition bootfähig macht.
+.SH "AUTOREN"
+.\" basiert auf englisher Manualseite MS-SYS Version 2.5.0 "September 25, 2005"
+Die englischsprachige Handbuchseite wurde ursprünglich von G\[:u]rkan Seng\[:u]n geschrieben 
+und dann von Henrik Carlqvist bearbeitet. Er hat größtenteils das Programm ms-sys geschrieben,
+die Datei CONTRIBUTORS in dem Quellen-Archiv enthält eine
+komplette Liste der Mitwirkenden.
+.SH "SIEHE AUCH"
+mformat(1)  fdformat(8)  mkdosfs(8)  mkisofs(8)  parted(8)
+.\" .TH MS-SYS 1 "September 25, 2005"
+.\" 
+.\" FOR EMACS
+.\" Local Variables:
+.\" coding: utf-8
+.\" ispell-local-dictionary: "german8"
+.\" eval:(make-local-variable 'compile-command)
+.\" eval:(setq compile-command (concat "echo  "(buffer-file-name) ))
+.\" eval:(make-local-variable 'time-stamp-start)
+.\" eval:(setq time-stamp-start "^\.TH MS-SYS 1 \"")
+.\" eval:(make-local-variable 'time-stamp-format)
+.\" eval:(setq time-stamp-format "%:b %02d, %04y")
+.\" End:
+.\" 
