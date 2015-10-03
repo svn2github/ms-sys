@@ -17,39 +17,39 @@
 .\" for manpage-specific macros, see man(7)
 .SH "BEZEICHNUNG"
 ms-sys \- schreibt einen Microsoft Bootblock
-.SH "ÜBERSICHT"
+.SH "\[:U]BERSICHT"
 .B ms-sys
-.RI "[Optionen] [Gerät]"
+.RI "[Optionen] [Ger\[:a]t]"
 .SH "BESCHREIBUNG"
-\fBms-sys\fP ist für das Schreiben von Microsoft kompatiblen Bootrecords.
+\fBms-sys\fP ist f\[:u]r das Schreiben von Microsoft kompatiblen Bootrecords.
 .SH "OPTIONEN"
-Eine Zusammenfassung der Optionen ist unten aufgeführt.
+Eine Zusammenfassung der Optionen ist unten aufgef\[:u]hrt.
 .TP
 .B \-1, \-\-fat12
-Schreibt einen FAT12 Disketten Bootrecord aufs Gerät.
+Schreibt einen FAT12 Disketten Bootrecord aufs Ger\[:a]t.
 .TP
 .B \-2, \-\-fat32nt
-Schreibt einen FAT32 Partition NT Bootrecord aufs Gerät.
+Schreibt einen FAT32 Partition NT Bootrecord aufs Ger\[:a]t.
 .TP
 .B \-e, \-\-fat32pe
-Schreibt einen FAT32 Partition PE Bootrecord aufs Gerät, 
-für USB Installation und Wiederherstellung.
+Schreibt einen FAT32 Partition PE Bootrecord aufs Ger\[:a]t, 
+f\[:u]r USB Installation und Wiederherstellung.
 .TP
 .B \-3, \-\-fat32
-Schreibt einen FAT32 Partition DOS (Win9x) Bootrecord aufs Gerät, 
+Schreibt einen FAT32 Partition DOS (Win9x) Bootrecord aufs Ger\[:a]t, 
 .TP
 .B \-4, \-\-fat32free
-Schreibt einen FAT32 Partition FreeDOS Bootrecord aufs Gerät, 
+Schreibt einen FAT32 Partition FreeDOS Bootrecord aufs Ger\[:a]t, 
 .TP
 .B \-5, \-\-fat16free
-Schreibt einen FAT16 Partition  Bootrecord aufs Gerät, 
+Schreibt einen FAT16 Partition  Bootrecord aufs Ger\[:a]t, 
 .TP
 .B \-6, \-\-fat16
-Schreibt einen FAT16 Partition DOS (Win9x) Bootrecord aufs Gerät, 
+Schreibt einen FAT16 Partition DOS (Win9x) Bootrecord aufs Ger\[:a]t, 
 .TP
 .B \-n, \-\-ntfs
-Schreibt einen NTFS Partition Windows 7 Bootrecord aufs Gerät.
-Diese Funktionalität sollte als experimentell angesehen werden und 
+Schreibt einen NTFS Partition Windows 7 Bootrecord aufs Ger\[:a]t.
+Diese Funktionalit\[:a]t sollte als experimentell angesehen werden und 
 ist wahrscheinlich von keinem praktischen Nutzen.
 .TP
 .B \-l, \-\-wipelabel
@@ -57,60 +57,60 @@ Entfernt Volumenlabel im Bootrecord.
 .TP
 .B \-p, \-\-partition
 .\" wrong hyphenation Laufwerkskennung
-Schreibt Partitions-Info (versteckte Sektoren, Köpfe und 
+Schreibt Partitions-Info (versteckte Sektoren, K\[:o]pfe und 
 Laufwerkskennung) in Bootrecord.
-Dies könnte auf einigen Partitionen erforderlich sein, je nach 
+Dies k\[:o]nnte auf einigen Partitionen erforderlich sein, je nach 
 verwendetem Programm, mit dem das Dateisystem erstellt wurde.
 .TP
 .B \-H <n>, \-\-heads <n>
-Anzahl der Köpfe, wenn -p Option verwendet wird.
+Anzahl der K\[:o]pfe, wenn -p Option verwendet wird.
 .TP
 .B \-7, \-\-mbr7
-Schreibt einen Windows 7 Master-Bootrecord aufs Gerät.
-Dies ändert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
+Schreibt einen Windows 7 Master-Bootrecord aufs Ger\[:a]t.
+Dies \[:a]ndert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
 Dieser MBR wird bestimmte Partitionstypen jenseits der Zylindergrenze 
 1024 booten mittels LBA-Adressierung.
 .TP
 .B \-i, \-\-mbrvista
-Schreibt einen Windows Vista Master-Bootrecord aufs Gerät.
-Dies ändert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
+Schreibt einen Windows Vista Master-Bootrecord aufs Ger\[:a]t.
+Dies \[:a]ndert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
 Dieser MBR wird bestimmte Partitionstypen jenseits der Zylindergrenze 
 1024 booten mittels LBA-Adressierung.
 .TP
 .B \-m, \-\-mbr
-Schreibt einen Windows 2000/XP/2003 Master-Bootrecord aufs Gerät.
-Dies ändert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
+Schreibt einen Windows 2000/XP/2003 Master-Bootrecord aufs Ger\[:a]t.
+Dies \[:a]ndert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
 Dieser MBR wird bestimmte Partitionstypen jenseits der Zylindergrenze 
 1024 booten mittels LBA-Adressierung.
 .TP
 .B \-9, \-\-mbr95b
-Schreibt einen Windows 95B/98/98SE/ME Master-Bootrecord aufs Gerät.
-Dies ändert weder die Windows Platten-Signatur (Bytes 01b8-01bd) noch
+Schreibt einen Windows 95B/98/98SE/ME Master-Bootrecord aufs Ger\[:a]t.
+Dies \[:a]ndert weder die Windows Platten-Signatur (Bytes 01b8-01bd) noch
 das Boot-Laufwerk und die Zeit (Bytes 00da-00df).
 Dieser MBR wird Partitionstypen 0c and 0e jenseits der Zylindergrenze 
 1024 booten mittels LBA-Adressierung.
 .TP
 .B \-d, \-\-mbrdos
-Schreibt einen DOS/Windows NT Master-Bootrecord aufs Gerät.
-Dies ändert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
+Schreibt einen DOS/Windows NT Master-Bootrecord aufs Ger\[:a]t.
+Dies \[:a]ndert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
 Dieser MBR wird nicht jenseits der Zylindergrenze 1024 booten 
-da er die LBA-Adressierung nicht unterstützt.
+da er die LBA-Adressierung nicht unterst\[:u]tzt.
 .TP
 .B \-s, \-\-mbrsyslinux
-Schreibt einen Syslinux Master-Bootrecord aufs Gerät.
-Dies ändert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
+Schreibt einen Syslinux Master-Bootrecord aufs Ger\[:a]t.
+Dies \[:a]ndert die Windows Platten-Signatur nicht (Bytes 01b8-01bd).
 Dieser MBR wird jeden Partitionstypen jenseits der Zylindergrenze 
 1024 booten mittels LBA-Adressierung.
 .TP
 .B \-t, \-\-mbrgptsyslinux
-Schreibt einen GPL Syslinux GPT Master-Bootrecord aufs Gerät.
+Schreibt einen GPL Syslinux GPT Master-Bootrecord aufs Ger\[:a]t.
 Dieser MBR wird booten von einer GUID-Partitionstabelle.
 .TP
 .B \-z, \-\-mbrzero
-Schreibt einen leeren (augenullten, nicht startbaren) Master-Bootrecord aufs Gerät.
+Schreibt einen leeren (augenullten, nicht startbaren) Master-Bootrecord aufs Ger\[:a]t.
 Nullt alle Bytes mit Ausnahme der Partitionstabelle und
 der Windows Platten-Signatur (Bytes 01BE-01FF).
-Ähnlich wie ein leere DOS-Partitionstabelle, die fdisk erstellt.
+\[:A]hnlich wie ein leere DOS-Partitionstabelle, die fdisk erstellt.
 .TP
 .B \-f, \-\-force
 Schreiben des Bootrecords erzwingen.
@@ -122,20 +122,20 @@ Zeigt Zusammenfassung der Optionen.
 Zeigt Programmversion.
 .TP
 .B \-w, \-\-write
-Schreibt automatisch gewählten Bootrecord aufs Gerät.
+Schreibt automatisch gew\[:a]hlten Bootrecord aufs Ger\[:a]t.
 .P
 ms-sys ohne Optionen wird eine einfache Diagnose an 
-dem angegebenen Gerät durchführen.
+dem angegebenen Ger\[:a]t durchf\[:u]hren.
 .br
 .SH "BEISPIELE"
 .P
-Bitte beachten Sie, dass Windows ME nicht sinnvoll für die Herstellung von
-eigenständig bootfähigen Disketten ist. 
+Bitte beachten Sie, dass Windows ME nicht sinnvoll f\[:u]r die Herstellung von
+eigenst\[:a]ndig bootf\[:a]higen Disketten ist. 
 Win9x und DOS jedoch funktionieren gut mit den ersten beiden Beispielen.
 .P
-.B Erstellen einer bootfähigen 1,68 MB Diskette 
+.B Erstellen einer bootf\[:a]higen 1,68 MB Diskette 
 .TP
-Dieses Beispiel geht davon aus, dass Sie Ihre Windows-Installation in /dosc eingehängt haben und
+Dieses Beispiel geht davon aus, dass Sie Ihre Windows-Installation in /dosc eingeh\[:a]ngt haben und
 auch mtools und fdformat installiert sind.
 .P
 fdformat /dev/fd0u1680
@@ -150,7 +150,7 @@ mcopy /dosc/msdos.sys a:
 .br
 mcopy /dosc/command.com a:
 .P
-.B Erstellen eines bootfähigen 2.8 MB Disketten-Abbilds für eine El-Torito bootfähige CD.
+.B Erstellen eines bootf\[:a]higen 2.8 MB Disketten-Abbilds f\[:u]r eine El-Torito bootf\[:a]hige CD.
 .P
 dd if=/dev/zero of=floppy288.img bs=1024 count=2880
 .br
@@ -168,7 +168,7 @@ cp io.sys /mnt/
 .br
 cp command.com /mnt/
 .br
-(es könnte auch eine gute Idee sein, eine config.sys und autoexec.bat mit CD-ROM-Unterstützung hinzufügen)
+(es k\[:o]nnte auch eine gute Idee sein, eine config.sys und autoexec.bat mit CD-ROM-Unterst\[:u]tzung hinzuf\[:u]gen)
 .br
 umount /mnt
 .br
@@ -194,7 +194,7 @@ Schritt 3, schreiben des FAT32 Partition Bootrecords:
 .P
 ms-sys -w /dev/hda1
 .P
-Schritt 4, einhängen des neuen Dateisystems:
+Schritt 4, einh\[:a]ngen des neuen Dateisystems:
 .P
 mount /dev/hda1 /mnt
 .P
@@ -203,30 +203,30 @@ Schritt 5, Wiederherstellen ihres Backups
 cd /mnt; tar -xzvf /path/to/my_windows_backup_file.tgz
 .br
 .SH "UMGEBUNG"
-Die Variablen LANG und LC_ALL haben die übliche Bedeutung,
-aber es sind nicht viele Übersetzungen vorhanden.
+Die Variablen LANG und LC_ALL haben die \[:u]bliche Bedeutung,
+aber es sind nicht viele \[:U]bersetzungen vorhanden.
 .br
 .SH "FEHLER"
-Es gab Berichte über nicht mehr bootbare FAT32-Partitionen erstellt mit
-"mformat -F C:". Das Problem wurde auch auf für Partitionen gemeldet,
+Es gab Berichte \[:u]ber nicht mehr bootbare FAT32-Partitionen erstellt mit
+"mformat -F C:". Das Problem wurde auch auf f\[:u]r Partitionen gemeldet,
 die mit mkdosfs und mkfs.vfat formatiert wurden. Eine Abhilfe ist, 
 statt dessen GNU parted zu verwenden um die Partition zu erstellen.
 Seit der Version 1.1.3 ms-sys hat den Schalter \-p, der dieses Problem beheben soll. 
 Leider funktioniert mit Linux Kernel 2.6 weder die Option \-p noch GNU parted.
 Eine einfache Abhilfe ist, ms-sys mit Linux Kernel 2.4 zu verwenden. 
-Eine andere mögliche Problemumgehung ist es, die Anzahl der Köpfe mit dem Schalter -H manuell einzustellen. 
-Wenn das System von LILO gebootet wurde, kann die korrekte Anzahl der Köpfe
+Eine andere m\[:o]gliche Problemumgehung ist es, die Anzahl der K\[:o]pfe mit dem Schalter -H manuell einzustellen. 
+Wenn das System von LILO gebootet wurde, kann die korrekte Anzahl der K\[:o]pfe
 durch "lilo -T geom" ermittelt werden.
 .P
 Das Schreiben von NTFS Partition-Bootrecords hat wohl keinen praktischen Nutzen.
-Für Windows 7 wurde berichtet, dass das Ausführen von "sysprep", 
+F\[:u]r Windows 7 wurde berichtet, dass das Ausf\[:u]hren von "sysprep", 
 bevor Sie ein Abbild einer NTFS-Partition erstellen,
-die aus diesem wiederhergestellte Partition bootfähig macht.
+die aus diesem wiederhergestellte Partition bootf\[:a]hig macht.
 .SH "AUTOREN"
 .\" basiert auf englisher Manualseite MS-SYS Version 2.5.0 "September 25, 2005"
-Die englischsprachige Handbuchseite wurde ursprünglich von G\[:u]rkan Seng\[:u]n geschrieben 
-und dann von Henrik Carlqvist bearbeitet. Er hat größtenteils das Programm ms-sys geschrieben,
-die Datei CONTRIBUTORS in dem Quellen-Archiv enthält eine
+Die englischsprachige Handbuchseite wurde urspr\[:u]nglich von G\[:u]rkan Seng\[:u]n geschrieben 
+und dann von Henrik Carlqvist bearbeitet. Er hat gr\[:o]\[ss]tenteils das Programm ms-sys geschrieben,
+die Datei CONTRIBUTORS in dem Quellen-Archiv enth\[:a]lt eine
 komplette Liste der Mitwirkenden.
 .SH "SIEHE AUCH"
 mformat(1)  fdformat(8)  mkdosfs(8)  mkisofs(8)  parted(8)
