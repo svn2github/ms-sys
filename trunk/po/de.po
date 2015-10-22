@@ -8,12 +8,12 @@ msgstr ""
 "Project-Id-Version: ms-sys 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-31 15:04+0100\n"
-"PO-Revision-Date: 2015-09-21 00:22+CEST\n"
-"Last-Translator: J√∂rg Jenderek <joerg.jen.der.ek@gmx.net>\n"
+"PO-Revision-Date: 2015-09-21 00:12+CEST\n"
+"Last-Translator: Jˆrg Jenderek <joerg.jen.der.ek@gmx.net>\n"
 "Language-Team: German \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/file.c:31
@@ -24,12 +24,12 @@ msgstr "Fehler: contains_data wurde aufgerufen mit uiLen > %d,\n"
 #: src/file.c:33
 #, c-format
 msgid "please increase MAX_DATA_LEN in file.h\n"
-msgstr "erh√∂he MAX_DATA_LEN in file.h\n"
+msgstr "erhˆhe MAX_DATA_LEN in file.h\n"
 
 #: src/identify.c:157
 #, c-format
 msgid "%s does not seem to be a disk device,\n"
-msgstr "%s scheint kein Datentr√§gerger√§t zu sein ,\n"
+msgstr "%s scheint kein Datentr‰gerger‰t zu sein ,\n"
 
 #: src/identify.c:159 src/identify.c:169 src/identify.c:179
 #, c-format
@@ -44,7 +44,7 @@ msgstr "%s scheint eine Diskette zu sein,\n"
 #: src/identify.c:177
 #, c-format
 msgid "%s seems to be a disk partition device,\n"
-msgstr "%s scheint ein partitioniertes Datentr√§gerger√§t zu sein,\n"
+msgstr "%s scheint ein partitioniertes Datentr‰gerger‰t zu sein,\n"
 
 #: src/identify.c:191
 #, c-format
@@ -64,7 +64,7 @@ msgstr "%s scheint kein FAT12 Dateisystem zu haben ,\n"
 #: src/identify.c:218 src/identify.c:247 src/identify.c:273
 #, c-format
 msgid "%s does not seem to be a disk partition device,\n"
-msgstr "%s scheint kein partitioniertes Datentr√§gerger√§t zu sein,\n"
+msgstr "%s scheint kein partitioniertes Datentr‰gerger‰t zu sein,\n"
 
 #: src/identify.c:221 src/identify.c:232
 #, c-format
@@ -139,7 +139,7 @@ msgstr "Dies ist genau die Art von NTFS Bootrecord, die dieses Programm\n"
 #: src/identify.c:328
 #, c-format
 msgid "would create with the switch -n on a NTFS partition.\n"
-msgstr "mit dem Schalter -n auf einer NTFS-Partition erstellen w√ºrde.\n"
+msgstr "mit dem Schalter -n auf einer NTFS-Partition erstellen w¸rde.\n"
 
 #: src/identify.c:333
 #, c-format
@@ -150,7 +150,7 @@ msgstr "Dies ist genau die Art von FAT12 Bootrecord, die dieses Programm\n"
 #: src/identify.c:335
 #, c-format
 msgid "would create with the switch -1 on a floppy.\n"
-msgstr "mit dem Schalter -1 auf einer Diskette erstellen w√ºrde.\n"
+msgstr "mit dem Schalter -1 auf einer Diskette erstellen w¸rde.\n"
 
 #: src/identify.c:342
 #, c-format
@@ -160,7 +160,7 @@ msgstr "Dies ist genau die Art von FAT16 DOS Bootrecord, die dieses Programm\n"
 #: src/identify.c:344
 #, c-format
 msgid "would create with the switch -6 on a FAT16 partition.\n"
-msgstr "mit dem Schalter -6 auf einer FAT16-Partition erstellen w√ºrde.\n"
+msgstr "mit dem Schalter -6 auf einer FAT16-Partition erstellen w¸rde.\n"
 
 #: src/identify.c:349
 #, c-format
@@ -170,7 +170,7 @@ msgstr "Dies ist genau die Art von FAT16 FreeDOS Bootrecord, die dieses Programm
 #: src/identify.c:351
 #, c-format
 msgid "would create with the switch -5 on a FAT16 partition.\n"
-msgstr "mit dem Schalter -5 auf einer FAT16-Partition erstellen w√ºrde.\n"
+msgstr "mit dem Schalter -5 auf einer FAT16-Partition erstellen w¸rde.\n"
 
 #: src/identify.c:356
 #, c-format
@@ -180,7 +180,7 @@ msgstr "Dies ist genau die Art von FAT32 DOS Bootrecord, die dieses Programm\n"
 #: src/identify.c:358
 #, c-format
 msgid "would create with the switch -3 on a FAT32 partition.\n"
-msgstr "mit dem Schalter -3 auf einer FAT32-Partition erstellen w√ºrde.\n"
+msgstr "mit dem Schalter -3 auf einer FAT32-Partition erstellen w¸rde.\n"
 
 #: src/identify.c:363 src/identify.c:370
 #, c-format
@@ -190,12 +190,12 @@ msgstr "Dies ist genau die Art von FAT32 NT Bootrecord, die dieses Programm\n"
 #: src/identify.c:365
 #, c-format
 msgid "would create with the switch -2 on a FAT32 partition.\n"
-msgstr "mit dem Schalter -2 auf einer FAT32-Partition erstellen w√ºrde.\n"
+msgstr "mit dem Schalter -2 auf einer FAT32-Partition erstellen w¸rde.\n"
 
 #: src/identify.c:372
 #, c-format
 msgid "would create with the switch -e on a FAT32 partition.\n"
-msgstr "mit dem Schalter -e auf einer FAT32-Partition erstellen w√ºrde.\n"
+msgstr "mit dem Schalter -e auf einer FAT32-Partition erstellen w¸rde.\n"
 
 #: src/identify.c:377
 #, c-format
@@ -205,7 +205,7 @@ msgstr "Dies ist genau die Art von FAT32 FreeDOS Bootrecord, die dieses Programm
 #: src/identify.c:379
 #, c-format
 msgid "would create with the switch -4 on a FAT32 partition.\n"
-msgstr "mit dem Schalter -4 auf einer FAT32-Partition erstellen w√ºrde.\n"
+msgstr "mit dem Schalter -4 auf einer FAT32-Partition erstellen w¸rde.\n"
 
 #: src/identify.c:384
 #, c-format
@@ -220,7 +220,7 @@ msgstr "unterscheidet sich von dem, was dieses Programm mit dem\n"
 #: src/identify.c:387
 #, c-format
 msgid "switch -6, -2, -e or -3 on a FAT16 or FAT32 partition.\n"
-msgstr "Schalter -6 , -2, -e oder -3 auf einer FAT16 oder FAT32-Partition erstellen w√ºrde.\n"
+msgstr "Schalter -6 , -2, -e oder -3 auf einer FAT16 oder FAT32-Partition erstellen w¸rde.\n"
 
 #: src/identify.c:392
 #, c-format
@@ -250,7 +250,7 @@ msgstr "dies ist ein Microsoft DOS/NT/95A Master-Bootrecord mit den undokmentier
 #: src/identify.c:407
 #, c-format
 msgid "F2 instruction. You will get equal functionality with the MBR this\n"
-msgstr "F2 Instruktionen. Sie werden die gleiche Funktionalit√§t mit dem MBR erhalten, den dieses\n"
+msgstr "F2 Instruktionen. Sie werden die gleiche Funktionalit‰t mit dem MBR erhalten, den dieses\n"
 
 #: src/identify.c:414
 #, c-format
@@ -316,7 +316,7 @@ msgstr "Programm auf einer Festplatte erstellt mit dem Schalter -t.\n"
 #: src/identify.c:456
 #, c-format
 msgid "it is a zeroed non-bootable master boot record, like the one this\n"
-msgstr "dies ist ein ausgenullter, nicht bootf√§higer Master-Bootrecord, wie ihn dieses\n"
+msgstr "dies ist ein ausgenullter, nicht bootf‰higer Master-Bootrecord, wie ihn dieses\n"
 
 #: src/identify.c:458
 #, c-format
@@ -331,12 +331,12 @@ msgstr "dies ist ein unbekannter Bootrecord\n"
 #: src/main.c:72
 #, c-format
 msgid "Unable to open %s, %s\n"
-msgstr "Kann %s nicht √∂ffnen, %s\n"
+msgstr "Kann %s nicht ˆffnen, %s\n"
 
 #: src/main.c:79
 #, c-format
 msgid "Unable to automaticly select boot record for %s\n"
-msgstr "Kann nicht automatisch Bootrecord ausw√§hlen f√ºr %s\n"
+msgstr "Kann nicht automatisch Bootrecord ausw‰hlen f¸r %s\n"
 
 #: src/main.c:102
 #, c-format
@@ -351,12 +351,12 @@ msgstr "Physikalische Laufwerkskennung 0x80 (C:) geschrieben nach %s\n"
 #: src/main.c:111
 #, c-format
 msgid "Number of heads (%d) successfully written to %s\n"
-msgstr "Anzahl der K√∂pfe (%d) geschrieben auf %s\n"
+msgstr "Anzahl der Kˆpfe (%d) geschrieben auf %s\n"
 
 #: src/main.c:117
 #, c-format
 msgid "Failed writing number of heads to %s\n"
-msgstr "Fehler beim Schreiben der Anzahl der K√∂pfe nach %s\n"
+msgstr "Fehler beim Schreiben der Anzahl der Kˆpfe nach %s\n"
 
 #: src/main.c:123
 #, c-format
@@ -366,7 +366,7 @@ msgstr "Fehler beim Schreiben der physikalischen Laufwerkskennung nach %s\n"
 #: src/main.c:129
 #, c-format
 msgid "Failed writing start sector to %s, this is only possible to do with\n"
-msgstr "Fehler beim Schreiben des Startsektors auf %s, dies ist nur m√∂glich mit\n"
+msgstr "Fehler beim Schreiben des Startsektors auf %s, dies ist nur mˆglich mit\n"
 
 #: src/main.c:131
 #, c-format
@@ -541,52 +541,52 @@ msgid ""
 "Options:\n"
 msgstr ""
 "Aufruf:\n"
-"\t%s [Optionen] [Ger√§t]\n"
+"\t%s [Optionen] [Ger‰t]\n"
 "Optionen:\n"
 
 #: src/main.c:367
 #, c-format
 msgid "    -1, --fat12     Write a FAT12 floppy boot record to device\n"
-msgstr "    -1, --fat12     Schreibt einen FAT12 Disketten Bootrecord auf Ger√§t\n"
+msgstr "    -1, --fat12     Schreibt einen FAT12 Disketten Bootrecord auf Ger‰t\n"
 
 #: src/main.c:369
 #, c-format
 msgid "    -2, --fat32nt   Write a FAT32 partition NT boot record to device\n"
-msgstr "    -2, --fat32nt   Schreibt einen FAT32 Partition NT Bootrecord auf Ger√§t\n"
+msgstr "    -2, --fat32nt   Schreibt einen FAT32 Partition NT Bootrecord auf Ger‰t\n"
 
 #: src/main.c:371
 #, c-format
 msgid "    -e, --fat32pe   Write a FAT32 partition PE boot record to device\n"
-msgstr "    -e, --fat32pe   Schreibt einen FAT32 Partition PE Bootrecord auf Ger√§t\n"
+msgstr "    -e, --fat32pe   Schreibt einen FAT32 Partition PE Bootrecord auf Ger‰t\n"
 
 #: src/main.c:373
 #, c-format
 msgid "    -3, --fat32     Write a FAT32 partition DOS boot record to device\n"
-msgstr "    -3, --fat32     Schreibt einen FAT32 Partition DOS Bootrecord auf Ger√§t\n"
+msgstr "    -3, --fat32     Schreibt einen FAT32 Partition DOS Bootrecord auf Ger‰t\n"
 
 #: src/main.c:375
 #, c-format
 msgid ""
 "    -4, --fat32free Write a FAT32 partition FreeDOS boot record to device\n"
-msgstr "    -4, --fat32free Schreibt einen FAT32 Partition FreeDOS Bootrecord auf Ger√§t\n"
+msgstr "    -4, --fat32free Schreibt einen FAT32 Partition FreeDOS Bootrecord auf Ger‰t\n"
 
 #: src/main.c:377
 #, c-format
 msgid ""
 "    -5, --fat16free Write a FAT16 partition FreeDOS boot record to device\n"
-msgstr "    -5, --fat16free Schreibt einen FAT16 Partition FreeDOS Bootrecord auf Ger√§t\n"
+msgstr "    -5, --fat16free Schreibt einen FAT16 Partition FreeDOS Bootrecord auf Ger‰t\n"
 
 #: src/main.c:379
 #, c-format
 msgid "    -6, --fat16     Write a FAT16 partition DOS boot record to device\n"
-msgstr "    -6, --fat16     Schreibt einen FAT16 Partition DOS Bootrecord auf Ger√§t\n"
+msgstr "    -6, --fat16     Schreibt einen FAT16 Partition DOS Bootrecord auf Ger‰t\n"
 
 #: src/main.c:381
 #, c-format
 msgid ""
 "    -n, --ntfs      Write a NTFS partition Windows 7 boot record to device\n"
 msgstr ""
-"    -n, --ntfs      Schreibt einen NTFS partition Windows 7 Bootrecord auf Ger√§t\n"
+"    -n, --ntfs      Schreibt einen NTFS partition Windows 7 Bootrecord auf Ger‰t\n"
 
 #: src/main.c:383
 #, c-format
@@ -598,7 +598,7 @@ msgstr "    -l, --wipelabel Entfernt Partition Volumenlabel im Bootrecord\n"
 msgid ""
 "    -p, --partition Write partition info (hidden sectors, heads and drive "
 "id)\n"
-msgstr "    -p, --partition Schreibt Partitions-Info (versteckte Sektoren, K√∂pfe und"
+msgstr "    -p, --partition Schreibt Partitions-Info (versteckte Sektoren, Kˆpfe und"
 "\n"
 
 #: src/main.c:387
@@ -611,47 +611,47 @@ msgstr "                    Laufwerkskennung) in Bootrecord\n"
 msgid ""
 "    -H, --heads <n> Manually set number of heads if partition info is "
 "written\n"
-msgstr "    -H, --heads <n> Anzahl der K√∂pfe, wenn Partition-Info geschrieben wird\n"
+msgstr "    -H, --heads <n> Anzahl der Kˆpfe, wenn Partition-Info geschrieben wird\n"
 
 #: src/main.c:391
 #, c-format
 msgid "    -7, --mbr7      Write a Windows 7 MBR to device\n"
-msgstr "    -7, --mbr7      Schreibt einen Windows 7 MBR auf Ger√§t\n"
+msgstr "    -7, --mbr7      Schreibt einen Windows 7 MBR auf Ger‰t\n"
 
 #: src/main.c:393
 #, c-format
 msgid "    -i, --mbrvista  Write a Windows Vista MBR to device\n"
-msgstr "    -i, --mbrvista  Schreibt einen Windows Vista MBR auf Ger√§t\n"
+msgstr "    -i, --mbrvista  Schreibt einen Windows Vista MBR auf Ger‰t\n"
 
 #: src/main.c:395
 #, c-format
 msgid "    -m, --mbr       Write a Windows 2000/XP/2003 MBR to device\n"
-msgstr "    -m, --mbr       Schreibt einen Windows 2000/XP/2003 MBR auf Ger√§t\n"
+msgstr "    -m, --mbr       Schreibt einen Windows 2000/XP/2003 MBR auf Ger‰t\n"
 
 #: src/main.c:397
 #, c-format
 msgid "    -9, --mbr95b    Write a Windows 95B/98/98SE/ME MBR to device\n"
-msgstr "    -9, --mbr95b    Schreibt einen Windows 95B/98/98SE/ME MBR auf Ger√§t\n"
+msgstr "    -9, --mbr95b    Schreibt einen Windows 95B/98/98SE/ME MBR auf Ger‰t\n"
 
 #: src/main.c:399
 #, c-format
 msgid "    -d, --mbrdos    Write a DOS/Windows NT MBR to device\n"
-msgstr "    -d, --mbrdos    schreibt einen DOS/Windows NT MBR auf Ger√§t\n"
+msgstr "    -d, --mbrdos    schreibt einen DOS/Windows NT MBR auf Ger‰t\n"
 
 #: src/main.c:401
 #, c-format
 msgid "    -s, --mbrsyslinux    Write a syslinux MBR to device\n"
-msgstr "    -s, --mbrsyslinux    Schreibt einen Syslinux MBR auf Ger√§t\n"
+msgstr "    -s, --mbrsyslinux    Schreibt einen Syslinux MBR auf Ger‰t\n"
 
 #: src/main.c:403
 #, c-format
 msgid "    -t, --mbrgptsyslinux Write a syslinux GPT MBR to device\n"
-msgstr "    -t, --mbrgptsyslinux Schreibt einen Syslinux GPT MBR auf Ger√§t\n"
+msgstr "    -t, --mbrgptsyslinux Schreibt einen Syslinux GPT MBR auf Ger‰t\n"
 
 #: src/main.c:405
 #, c-format
 msgid "    -z, --mbrzero   Write an empty (zeroed) MBR to device\n"
-msgstr "    -z, --mbrzero   Schreibt ein leeren (augenullten) MBR auf Ger√§t\n"
+msgstr "    -z, --mbrzero   Schreibt ein leeren (augenullten) MBR auf Ger‰t\n"
 
 #: src/main.c:407
 #, c-format
@@ -674,7 +674,7 @@ msgid ""
 "    -w, --write     Write automatically selected boot record to device\n"
 "\n"
 msgstr ""
-"    -w, --write     Schreibt automatisch gew√§hlten Bootrecord auf Ger√§t\n"
+"    -w, --write     Schreibt automatisch gew‰hlten Bootrecord auf Ger‰t\n"
 "\n"
 
 #: src/main.c:414
@@ -687,7 +687,7 @@ msgstr "    Untersuche aktuellen Bootrecord\n\n"
 #: src/main.c:416
 #, c-format
 msgid "Warning: Writing the wrong kind of boot record to a device might\n"
-msgstr "Warnung: Schreiben der falschen Art von Bootrecord auf ein Ger√§t k√∂nnte\n"
+msgstr "Warnung: Schreiben der falschen Art von Bootrecord auf ein Ger‰t kˆnnte\n"
 
 #: src/main.c:418
 #, c-format
@@ -695,7 +695,7 @@ msgid ""
 "destroy partition information or file system!\n"
 "\n"
 msgstr ""
-"Partitionsinformation oder Dateisystem zerst√∂ren!\n"
+"Partitionsinformation oder Dateisystem zerstˆren!\n"
 "\n"
 
 #: src/main.c:423
@@ -722,7 +722,7 @@ msgstr "Copyright (C) 2009-2015 Free Software Foundation, Inc.\n"
 msgid ""
 "This is free software; see the source for copying conditions.  There is NO\n"
 msgstr ""
-"Dies ist freie Software; Sehen sie in den Quellen f√ºr die Kopierbedingungen. Es gibt KEINE\n"
+"Dies ist freie Software; Sehen sie in den Quellen f¸r die Kopierbedingungen. Es gibt KEINE\n"
 
 #: src/main.c:427
 #, c-format
@@ -730,12 +730,12 @@ msgid ""
 "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
 "\n"
 msgstr ""
-"Garantie; auch nicht f√ºr VERKAUFBARKEIT oder F√úR EINEN BESTIMMTEN ZWECK\n"
+"Garantie; auch nicht f¸r VERKAUFBARKEIT oder F‹R EINEN BESTIMMTEN ZWECK\n"
 "\n"
 
 # FOR EMACS
 # Local Variables:
-# coding: utf-8
+# coding: iso-latin-1
 # ispell-local-dictionary: "german8"
 # eval:(make-local-variable 'compile-command)
 # eval:(setq compile-command (concat "msgfmt -o de.mo "(buffer-file-name) ))
