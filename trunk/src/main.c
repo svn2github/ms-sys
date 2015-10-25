@@ -28,6 +28,7 @@
 #include "fat32nt.h"
 #include "fat32pe.h"
 #include "ntfs.h"
+#include "oem_id.h"
 #include "br.h"
 #include "identify.h"
 #include "nls.h"
@@ -90,6 +91,14 @@ int main(int argc, char **argv)
 	 return 1;
       }
    }
+   if(szOemId && !bForce)
+   {
+      if( ! ok_to_write_oem_id(fp, argv[argc-1], 1) )
+      {
+	 fclose(fp);
+	 return 1;
+      }
+   }
    if( bWritePartitionInfo )
    {
       if( !iBr && !bForce)
@@ -139,7 +148,7 @@ int main(int argc, char **argv)
    {
       case NO_WRITING:
       {
-	 if( ! bWritePartitionInfo )
+	 if( (!bWritePartitionInfo) && (!szOemId) )
 	 {
 	    diagnose(fp, argv[argc-1]);
 	 }
@@ -358,6 +367,18 @@ int main(int argc, char **argv)
 	 printf(_("Whoops, internal error, unknown boot record\n"));
       }
       break;
+   }
+   if(szOemId)
+   {
+      if(write_oem_id(fp, szOemId))
+	 printf(_("OEM ID '%s' successfully written to %s\n"),
+		szOemId, argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing OEM ID to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }	    
    }
    fclose(fp);
    return iRet;
