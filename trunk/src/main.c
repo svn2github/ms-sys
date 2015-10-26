@@ -410,9 +410,9 @@ void print_help(const char *szCommand)
    printf(
       _("                    to boot record\n"));
    printf(
-      _("    -O, --writeoem <s>   Write OEM ID string <s> to file system\n"));
-   printf(
       _("    -H, --heads <n> Manually set number of heads if partition info is written\n"));
+   printf(
+      _("    -O, --writeoem <s>   Write OEM ID string <s> to file system\n"));
    printf(
       _("    -7, --mbr7      Write a Windows 7 MBR to device\n"));
    printf(
