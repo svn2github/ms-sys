@@ -471,14 +471,14 @@ void diagnose(FILE *fp, const char *szPath)
 	 printf(
 	   _("it is exactly the kind of FAT32 ReactOS boot record this program\n"));
 	 printf(
-	    _("would create with the switch -O on a FAT32 partition.\n"));
+	    _("would create with the switch -c on a FAT32 partition.\n"));
       }
       else if(entire_fat_32_kos_br_matches(fp))
       {
 	 printf(
 	   _("it is exactly the kind of FAT32 KolibriOS boot record this program\n"));
 	 printf(
-	    _("would create with the switch -K on a FAT32 partition.\n"));
+	    _("would create with the switch -q on a FAT32 partition.\n"));
       }
       else
       {
@@ -564,7 +564,7 @@ void diagnose(FILE *fp, const char *szPath)
          printf(
             _("it is a ReactOS master boot record, like the one this\n"));
          printf(
-            _("program creates with the switch -0 on a hard disk device.\n"));
+            _("program creates with the switch -a on a hard disk device.\n"));
    }
    else if(is_kolibrios_mbr(fp))
    {
@@ -585,7 +585,7 @@ void diagnose(FILE *fp, const char *szPath)
          printf(
             _("it is a GRUB 2 master boot record, like the one this\n"));
          printf(
-            _("program creates with the switch -G on a hard disk device.\n"));
+            _("program creates with the switch -b on a hard disk device.\n"));
    }
    else if(is_zero_mbr(fp))
    {

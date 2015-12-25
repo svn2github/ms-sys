@@ -267,6 +267,7 @@ int main(int argc, char **argv)
 	    iRet = 1;
 	 }
       }
+      break;
       case MBR_KOLIBRIOS:
       {
 	 if(write_kolibrios_mbr(fp))
@@ -410,6 +411,20 @@ int main(int argc, char **argv)
 	 }
       }
       break;
+      case FAT32KOS_BR:
+      {
+	 if(write_fat_32_kos_br(fp, bKeepLabel))
+	    printf(
+	       _("FAT32 KolibriOS boot record successfully written to %s\n"),
+	       argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing FAT32 KolibriOS boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }
+      }
+      break;
       case FAT32ROS_BR:
       {
 	 if(write_fat_32_ros_br(fp, bKeepLabel))
@@ -493,9 +508,9 @@ void print_help(const char *szCommand)
    printf(
       _("    -o, --fat16ros  Write a FAT16 partition ReactOS boot record to device\n"));
    printf(
-      _("    -O, --fat32ros  Write a FAT32 partition ReactOS boot record to device\n"));
+      _("    -c, --fat32ros  Write a FAT32 partition ReactOS boot record to device\n"));
    printf(
-      _("    -K, --fat32kos  Write a FAT32 partition KolibriOS boot record to device\n"));
+      _("    -q, --fat32kos  Write a FAT32 partition KolibriOS boot record to device\n"));
    printf(
       _("    -l, --wipelabel Reset partition disk label in boot record\n"));
    printf(
@@ -523,7 +538,7 @@ void print_help(const char *szCommand)
    printf(
       _("    -t, --mbrgptsyslinux Write a Syslinux GPT MBR to device\n"));
    printf(
-      _("    -0, --mbrreactos     Write a ReactOS MBR to device\n"));
+      _("    -a, --mbrreactos     Write a ReactOS MBR to device\n"));
    printf(
       _("    -k, --mbrkolibrios   Write a KolibriOS MBR to device\n"));
    printf(
@@ -531,7 +546,7 @@ void print_help(const char *szCommand)
    printf(
       _("    -g, --mbrgrub4dos    Write a Grub4Dos MBR to device\n"));
    printf(
-      _("    -G, --mbrgrub2  Write a Grub 2 MBR to device\n"));
+      _("    -b, --mbrgrub2  Write a Grub 2 MBR to device\n"));
    printf(
       _("    -z, --mbrzero   Write an empty (zeroed) MBR to device\n"));
    printf(
@@ -651,7 +666,7 @@ int parse_switches(int argc, char **argv, int *piBr,
 	 {
 	    switch(argv[argc][i])
 	    {
-	       case '0':
+	       case 'a':
 		  *piBr = MBR_REACTOS;
 		  break;
 	       case '1':
@@ -678,10 +693,10 @@ int parse_switches(int argc, char **argv, int *piBr,
 	       case 'o':
 		  *piBr = FAT16ROS_BR;
 		  break;
-	       case 'O':
+	       case 'c':
 		  *piBr = FAT32ROS_BR;
 		  break;
-	       case 'K':
+	       case 'q':
 		  *piBr = FAT32KOS_BR;
 		  break;
 	       case 'n':
@@ -723,7 +738,7 @@ int parse_switches(int argc, char **argv, int *piBr,
 	       case 'g':
 		  *piBr = MBR_GRUB4DOS;
 		  break;
-	       case 'G':
+	       case 'b':
 		  *piBr = MBR_GRUB2;
 		  break;
 	       case 'k':
