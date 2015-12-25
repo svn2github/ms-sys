@@ -37,11 +37,8 @@ void print_version(void);
 int parse_switches(int argc, char **argv, int *piBr,
 		   int *pbForce, int *pbPrintVersion,
 		   int *pbKeepLabel, int *pbWritePartitionInfo, int *piHeads,
-		   char **pszOemId, unsigned long *pulBytesPerSector);
+		   char **pszOemId);
 int isnumber(const char *szString);
-
-/* Keep the bytes per sector as a global */
-unsigned long ulBytesPerSector = 512;
 
 int main(int argc, char **argv)
 {
@@ -58,7 +55,7 @@ int main(int argc, char **argv)
    nls_init();
    if(parse_switches(argc, argv, &iBr, &bForce, &bPrintVersion,
 		     &bKeepLabel, &bWritePartitionInfo, &iHeads,
-		     &szOemId, &ulBytesPerSector))
+		     &szOemId))
    {
       print_help(argv[0]);
       return 0;
@@ -565,7 +562,7 @@ void print_version(void)
 int parse_switches(int argc, char **argv, int *piBr,
 		   int *pbForce, int *pbPrintVersion, int *pbKeepLabel,
 		   int *pbWritePartitionInfo, int *piHeads,
-		   char **pszOemId, unsigned long *pulBytesPerSector)
+		   char **pszOemId)
 {
    int bHelp = 0;
    int i;
@@ -576,8 +573,6 @@ int parse_switches(int argc, char **argv, int *piBr,
    *pbKeepLabel = 1;
    *pbWritePartitionInfo = 0;
    *piHeads = -1;
-   *pulBytesPerSector = 512;
-
 
    if(argc < 2)
       return 1;
@@ -754,9 +749,7 @@ int parse_switches(int argc, char **argv, int *piBr,
 	 *piHeads = atoi(argv[argc--]);
       else if((!strcmp("--bps", argv[argc-1]) || !strcmp("-B", argv[argc-1])) &&
 	      isnumber(argv[argc]))
-	 *pulBytesPerSector = strtoul(argv[argc--], NULL, 0);
-	 if ((*pulBytesPerSector < 512) || (*pulBytesPerSector > 65536))
-		  *pulBytesPerSector = 512;
+	 set_bytes_per_sector(strtoul(argv[argc--], NULL, 0));
       else if((!strcmp("--writeoem", argv[argc-1]) || !strcmp("-O", argv[argc-1])))
 	 *pszOemId = argv[argc--];
       else

@@ -20,6 +20,15 @@
 #include "file.h"
 #include "br.h"
 
+static unsigned long ulBytesPerSector = 512;
+
+void set_bytes_per_sector(unsigned long ulValue)
+{
+   ulBytesPerSector = ulValue;
+   if ((ulBytesPerSector < 512) || (ulBytesPerSector > 65536))
+      ulBytesPerSector = 512;
+} /* set_bytes_per_sector */
+
 int is_br(FILE *fp)
 {
    /* A "file" is probably some kind of boot record if it contains the magic
@@ -171,7 +180,6 @@ int is_zero_mbr(FILE *fp)
    the boot marker at every 512-2 bytes location */
 static int write_bootmark(FILE *fp)
 {
-   extern unsigned long ulBytesPerSector;
    unsigned char aucRef[] = {0x55, 0xAA};
    unsigned long pos = 0x1FE;
 

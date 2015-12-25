@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 
+/* Sets custom number of bytes per sector, default value is 512 */
+void set_bytes_per_sector(unsigned long ulValue);
+
 /* returns TRUE if the file has a boot record, otherwise FALSE.
    The file position will change when this function is called! */
 int is_br(FILE *fp);
