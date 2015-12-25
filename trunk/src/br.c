@@ -42,83 +42,120 @@ int is_lilo_br(FILE *fp)
 int is_dos_mbr(FILE *fp)
 {
    #include "mbr_dos.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       contains_data(fp, 0x0, mbr_dos_0x0, sizeof(mbr_dos_0x0)) &&
-      contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      is_br(fp);
 } /* is_dos_mbr */
 
 int is_dos_f2_mbr(FILE *fp)
 {
    #include "mbr_dos_f2.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       contains_data(fp, 0x0, mbr_dos_f2_0x0, sizeof(mbr_dos_f2_0x0)) &&
-      contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      is_br(fp);
 } /* is_dos_f2_mbr */
 
 int is_95b_mbr(FILE *fp)
 {
    #include "mbr_95b.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       contains_data(fp, 0x0,   mbr_95b_0x0,   sizeof(mbr_95b_0x0)) &&
       contains_data(fp, 0x0e0, mbr_95b_0x0e0, sizeof(mbr_95b_0x0e0)) &&
-      contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      is_br(fp);
 } /* is_95b_mbr */
 
 int is_2000_mbr(FILE *fp)
 {
    #include "mbr_2000.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       contains_data(fp, 0x0, mbr_2000_0x0, sizeof(mbr_2000_0x0)) &&
-      contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      is_br(fp);
 } /* is_2000_mbr */
 
 int is_vista_mbr(FILE *fp)
 {
    #include "mbr_vista.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       contains_data(fp, 0x0, mbr_vista_0x0, sizeof(mbr_vista_0x0)) &&
-      contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      is_br(fp);
 } /* is_vista_mbr */
 
 int is_win7_mbr(FILE *fp)
 {
    #include "mbr_win7.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       contains_data(fp, 0x0, mbr_win7_0x0, sizeof(mbr_win7_0x0)) &&
-      contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      is_br(fp);
 } /* is_win7_mbr */
+
+int is_rufus_mbr(FILE *fp)
+{
+   #include "mbr_rufus.h"
+
+   return
+      contains_data(fp, 0x0, mbr_rufus_0x0, sizeof(mbr_rufus_0x0)) &&
+      is_br(fp);
+} /* is_rufus_mbr */
+
+int is_reactos_mbr(FILE *fp)
+{
+   #include "mbr_reactos.h"
+
+   return
+      contains_data(fp, 0x0, mbr_reactos_0x0, sizeof(mbr_reactos_0x0)) &&
+      is_br(fp);
+} /* is_reactos_mbr */
+
+int is_grub4dos_mbr(FILE *fp)
+{
+   #include "mbr_grub.h"
+
+   return
+      contains_data(fp, 0x0, mbr_grub_0x0, sizeof(mbr_grub_0x0)) &&
+      is_br(fp);
+} /* is_grub_mbr */
+
+int is_grub2_mbr(FILE *fp)
+{
+   #include "mbr_grub2.h"
+
+   return
+      contains_data(fp, 0x0, mbr_grub2_0x0, sizeof(mbr_grub2_0x0)) &&
+      is_br(fp);
+} /* is_grub2_mbr */
+
+int is_kolibrios_mbr(FILE *fp)
+{
+   #include "mbr_kolibri.h"
+
+   return
+      contains_data(fp, 0x0, mbr_kolibri_0x0, sizeof(mbr_kolibri_0x0)) &&
+      is_br(fp);
+} /* is_kolibri_mbr */
 
 int is_syslinux_mbr(FILE *fp)
 {
    #include "mbr_syslinux.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       contains_data(fp, 0x0, mbr_syslinux_0x0, sizeof(mbr_syslinux_0x0)) &&
-      contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      is_br(fp);
 } /* is_syslinux_mbr */
 
 int is_syslinux_gpt_mbr(FILE *fp)
 {
    #include "mbr_gpt_syslinux.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       contains_data(fp, 0x0, mbr_gpt_syslinux_0x0,
 		    sizeof(mbr_gpt_syslinux_0x0)) &&
-      contains_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      is_br(fp);
 } /* is_syslinux_gpt_mbr */
 
 int is_zero_mbr(FILE *fp)
@@ -130,83 +167,135 @@ int is_zero_mbr(FILE *fp)
 	/* Don't bother to check 55AA signature */
 } /* is_zero_mbr */
 
+/* Handle nonstandard sector sizes (such as 4K) by writing
+   the boot marker at every 512-2 bytes location */
+static int write_bootmark(FILE *fp)
+{
+   extern unsigned long ulBytesPerSector;
+   unsigned char aucRef[] = {0x55, 0xAA};
+   unsigned long pos = 0x1FE;
+
+   for (pos = 0x1FE; pos < ulBytesPerSector; pos += 0x200) {
+      if (!write_data(fp, pos, aucRef, sizeof(aucRef)))
+		    return 0;
+   }
+   return 1;
+}
+
 int write_dos_mbr(FILE *fp)
 {
    #include "mbr_dos.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       write_data(fp, 0x0, mbr_dos_0x0, sizeof(mbr_dos_0x0)) &&
-      write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      write_bootmark(fp);
 } /* write_dos_mbr */
 
 int write_95b_mbr(FILE *fp)
 {
    #include "mbr_95b.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       write_data(fp, 0x0,   mbr_95b_0x0, sizeof(mbr_95b_0x0)) &&
       write_data(fp, 0x0e0, mbr_95b_0x0e0, sizeof(mbr_95b_0x0e0)) &&
-      write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      write_bootmark(fp);
 } /* write_95b_mbr */
 
 int write_2000_mbr(FILE *fp)
 {
    #include "mbr_2000.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       write_data(fp, 0x0, mbr_2000_0x0, sizeof(mbr_2000_0x0)) &&
-      write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      write_bootmark(fp);
 } /* write_2000_mbr */
 
 int write_vista_mbr(FILE *fp)
 {
    #include "mbr_vista.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       write_data(fp, 0x0, mbr_vista_0x0, sizeof(mbr_vista_0x0)) &&
-      write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      write_bootmark(fp);
 } /* write_vista_mbr */
 
 int write_win7_mbr(FILE *fp)
 {
    #include "mbr_win7.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       write_data(fp, 0x0, mbr_win7_0x0, sizeof(mbr_win7_0x0)) &&
-      write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      write_bootmark(fp);
 } /* write_win7_mbr */
+
+int write_rufus_mbr(FILE *fp)
+{
+   #include "mbr_rufus.h"
+
+   return
+      write_data(fp, 0x0, mbr_rufus_0x0, sizeof(mbr_rufus_0x0)) &&
+      write_bootmark(fp);
+} /* write_rufus_mbr */
+
+int write_reactos_mbr(FILE *fp)
+{
+   #include "mbr_reactos.h"
+
+   return
+      write_data(fp, 0x0, mbr_reactos_0x0, sizeof(mbr_reactos_0x0)) &&
+      write_bootmark(fp);
+} /* write_reactos_mbr */
+
+int write_kolibrios_mbr(FILE *fp)
+{
+   #include "mbr_kolibri.h"
+
+   return
+      write_data(fp, 0x0, mbr_kolibri_0x0, sizeof(mbr_kolibri_0x0)) &&
+      write_bootmark(fp);
+} /* write_kolibri_mbr */
 
 int write_syslinux_mbr(FILE *fp)
 {
    #include "mbr_syslinux.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       write_data(fp, 0x0, mbr_syslinux_0x0, sizeof(mbr_syslinux_0x0)) &&
-      write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      write_bootmark(fp);
 } /* write_syslinux_mbr */
 
 int write_syslinux_gpt_mbr(FILE *fp)
 {
    #include "mbr_gpt_syslinux.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
       write_data(fp, 0x0, mbr_gpt_syslinux_0x0, sizeof(mbr_gpt_syslinux_0x0)) &&
-      write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      write_bootmark(fp);
 } /* write_syslinux_gpt_mbr */
+
+int write_grub4dos_mbr(FILE *fp)
+{
+   #include "mbr_grub.h"
+
+   return
+      write_data(fp, 0x0, mbr_grub_0x0, sizeof(mbr_grub_0x0)) &&
+      write_bootmark(fp);
+}
+
+int write_grub2_mbr(FILE *fp)
+{
+   #include "mbr_grub2.h"
+
+   return
+      write_data(fp, 0x0, mbr_grub2_0x0, sizeof(mbr_grub2_0x0)) &&
+      write_bootmark(fp);
+}
 
 int write_zero_mbr(FILE *fp)
 {
    #include "mbr_zero.h"
-   unsigned char aucRef[] = {0x55, 0xAA};
 
    return
-      write_data(fp, 0x0,   mbr_zero_0x0, sizeof(mbr_zero_0x0)) &&
-      write_data(fp, 0x1FE, aucRef, sizeof(aucRef));
+      write_data(fp, 0x0, mbr_zero_0x0, sizeof(mbr_zero_0x0)) &&
+      write_bootmark(fp);
 } /* write_zero_mbr */

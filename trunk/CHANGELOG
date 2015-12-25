@@ -1,6 +1,11 @@
 Date       Version  Comment
 ---------------------------------------------------------------------------
-??/?  2015 2.5.?    Added german man page
+??/?  2015 2.5.?    Added german man page,
+                    added support for Grub2 and Grub4Dos MBR,
+                    added support for KolibriOS MBR and FAT32 boot record,
+                    added support for ReactOS MBR, FAT32 and FAT16 boot records,
+                    added support for Rufus MBR,
+                    added experimental support for large sectors (bigger than 512).
 
 26/9  2015 2.5.1    Added support to run on OpenBSD,
                     added german translation.

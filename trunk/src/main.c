@@ -1,5 +1,5 @@
 /******************************************************************
-    Copyright (C) 2009  Henrik Carlqvist
+    Copyright (C) 2009-2015 Henrik Carlqvist
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,11 +22,7 @@
 
 #include "fat12.h"
 #include "fat16.h"
-#include "fat16fd.h"
 #include "fat32.h"
-#include "fat32fd.h"
-#include "fat32nt.h"
-#include "fat32pe.h"
 #include "ntfs.h"
 #include "oem_id.h"
 #include "br.h"
@@ -41,8 +37,11 @@ void print_version(void);
 int parse_switches(int argc, char **argv, int *piBr,
 		   int *pbForce, int *pbPrintVersion,
 		   int *pbKeepLabel, int *pbWritePartitionInfo, int *piHeads,
-		   char **pszOemId);
+		   char **pszOemId, unsigned long *pulBytesPerSector);
 int isnumber(const char *szString);
+
+/* Keep the bytes per sector as a global */
+unsigned long ulBytesPerSector = 512;
 
 int main(int argc, char **argv)
 {
@@ -58,7 +57,8 @@ int main(int argc, char **argv)
 
    nls_init();
    if(parse_switches(argc, argv, &iBr, &bForce, &bPrintVersion,
-		     &bKeepLabel, &bWritePartitionInfo, &iHeads, &szOemId))
+		     &bKeepLabel, &bWritePartitionInfo, &iHeads,
+		     &szOemId, &ulBytesPerSector))
    {
       print_help(argv[0]);
       return 0;
@@ -114,7 +114,7 @@ int main(int argc, char **argv)
 	 printf(_("Start sector %ld (nr of hidden sectors) successfully written to %s\n"),
 		partition_start_sector(fp),
 		argv[argc-1]);
-	 if( write_partition_physical_disk_drive_id(fp) )
+	 if( write_partition_physical_disk_drive_id_fat32(fp) )
 	 {
 	    printf(_("Physical disk drive id 0x80 (C:) successfully written to %s\n"),
 		   argv[argc-1]);
@@ -190,7 +190,7 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing Windows 2000/XP/2003 master boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       case MBR_95B:
@@ -203,7 +203,7 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing Windows 95B/98/98SE/ME master boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       case MBR_DOS:
@@ -216,7 +216,7 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing DOS/Windows NT master boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       case MBR_SYSLINUX:
@@ -226,10 +226,10 @@ int main(int argc, char **argv)
 		   argv[argc-1]);
 	 else
 	 {
-	    printf(_("Failed writing syslinux master boot record to %s\n"),
+	    printf(_("Failed writing Syslinux master boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       case MBR_GPT_SYSLINUX:
@@ -239,10 +239,74 @@ int main(int argc, char **argv)
 		   argv[argc-1]);
 	 else
 	 {
-	    printf(_("Failed writing syslinux GPT master boot record to %s\n"),
+	    printf(_("Failed writing Syslinux GPT master boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
+      }
+      break;
+      case MBR_RUFUS:
+      {
+	 if(write_rufus_mbr(fp))
+	    printf(_("Rufus master boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing Rufus master boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }
+      }
+      break;
+      case MBR_REACTOS:
+      {
+	 if(write_reactos_mbr(fp))
+	    printf(_("ReactOS master boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing ReactOS master boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }
+      }
+      case MBR_KOLIBRIOS:
+      {
+	 if(write_kolibrios_mbr(fp))
+	    printf(_("KolibriOS master boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing KolibriOS master boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }
+      }
+      break;
+      case MBR_GRUB4DOS:
+      {
+	 if(write_grub4dos_mbr(fp))
+	    printf(_("Grub4DOS master boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing Grub4DOS master boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }
+      }
+      break;
+      case MBR_GRUB2:
+      {
+	 if(write_grub2_mbr(fp))
+	    printf(_("GRUB 2 master boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing GRUB2 master boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }
       }
       break;
       case MBR_ZERO:
@@ -255,7 +319,7 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing empty (zeroed) master boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       case FAT12_BR:
@@ -268,7 +332,7 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing FAT12 boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       case FAT16_BR:
@@ -281,7 +345,7 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing FAT16 boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       case FAT16FD_BR:
@@ -294,7 +358,20 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing FAT16 FreeDOS boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
+      }
+      break;
+      case FAT16ROS_BR:
+      {
+	 if(write_fat_16_ros_br(fp, bKeepLabel))
+	    printf(_("FAT16 ReactOS boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing FAT16 ReactOS boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }
       }
       break;
       case FAT32NT_BR:
@@ -307,7 +384,7 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing FAT32 NT boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       case FAT32PE_BR:
@@ -320,7 +397,7 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing FAT32 PE boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       case FAT32FD_BR:
@@ -333,7 +410,20 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing FAT32 FreeDOS boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
+      }
+      break;
+      case FAT32ROS_BR:
+      {
+	 if(write_fat_32_ros_br(fp, bKeepLabel))
+	    printf(_("FAT32 ReactOS boot record successfully written to %s\n"),
+		   argv[argc-1]);
+	 else
+	 {
+	    printf(_("Failed writing FAT32 ReactOS boot record to %s\n"),
+		   argv[argc-1]);
+	    iRet = 1;
+	 }
       }
       break;
       case FAT32_BR:
@@ -346,7 +436,7 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing FAT32 DOS boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       case NTFS_BR:
@@ -359,7 +449,7 @@ int main(int argc, char **argv)
 	    printf(_("Failed writing NTFS Windows 7 boot record to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
-	 }	    
+	 }
       }
       break;
       default:
@@ -388,21 +478,27 @@ void print_help(const char *szCommand)
 {
    printf(_("Usage:\n\t%s [options] [device]\nOptions:\n"), szCommand);
    printf(
-     _("    -1, --fat12     Write a FAT12 floppy boot record to device\n"));
+      _("    -1, --fat12     Write a FAT12 floppy boot record to device\n"));
    printf(
-     _("    -2, --fat32nt   Write a FAT32 partition NT boot record to device\n"));
+      _("    -2, --fat32nt   Write a FAT32 partition NT boot record to device\n"));
    printf(
-     _("    -e, --fat32pe   Write a FAT32 partition PE boot record to device\n"));
+      _("    -e, --fat32pe   Write a FAT32 partition PE boot record to device\n"));
    printf(
-     _("    -3, --fat32     Write a FAT32 partition DOS boot record to device\n"));
+      _("    -3, --fat32     Write a FAT32 partition DOS boot record to device\n"));
    printf(
-     _("    -4, --fat32free Write a FAT32 partition FreeDOS boot record to device\n"));
+      _("    -4, --fat32free Write a FAT32 partition FreeDOS boot record to device\n"));
    printf(
-     _("    -5, --fat16free Write a FAT16 partition FreeDOS boot record to device\n"));
+      _("    -5, --fat16free Write a FAT16 partition FreeDOS boot record to device\n"));
    printf(
-     _("    -6, --fat16     Write a FAT16 partition DOS boot record to device\n"));
+      _("    -6, --fat16     Write a FAT16 partition DOS boot record to device\n"));
    printf(
-     _("    -n, --ntfs      Write a NTFS partition Windows 7 boot record to device\n"));
+      _("    -n, --ntfs      Write a NTFS partition Windows 7 boot record to device\n"));
+   printf(
+      _("    -o, --fat16ros  Write a FAT16 partition ReactOS boot record to device\n"));
+   printf(
+      _("    -O, --fat32ros  Write a FAT32 partition ReactOS boot record to device\n"));
+   printf(
+      _("    -K, --fat32kos  Write a FAT32 partition KolibriOS boot record to device\n"));
    printf(
       _("    -l, --wipelabel Reset partition disk label in boot record\n"));
    printf(
@@ -411,6 +507,8 @@ void print_help(const char *szCommand)
       _("                    to boot record\n"));
    printf(
       _("    -H, --heads <n> Manually set number of heads if partition info is written\n"));
+   printf(
+      _("    -B, --bps <n>   Manually set number of bytes per sector (default 512)\n"));
    printf(
       _("    -O, --writeoem <s>   Write OEM ID string <s> to file system\n"));
    printf(
@@ -424,9 +522,19 @@ void print_help(const char *szCommand)
    printf(
       _("    -d, --mbrdos    Write a DOS/Windows NT MBR to device\n"));
    printf(
-      _("    -s, --mbrsyslinux    Write a syslinux MBR to device\n"));
+      _("    -s, --mbrsyslinux    Write a Syslinux MBR to device\n"));
    printf(
-      _("    -t, --mbrgptsyslinux Write a syslinux GPT MBR to device\n"));
+      _("    -t, --mbrgptsyslinux Write a Syslinux GPT MBR to device\n"));
+   printf(
+      _("    -0, --mbrreactos     Write a ReactOS MBR to device\n"));
+   printf(
+      _("    -k, --mbrkolibrios   Write a KolibriOS MBR to device\n"));
+   printf(
+      _("    -r, --mbrrufus  Write a Rufus MBR to device\n"));
+   printf(
+      _("    -g, --mbrgrub4dos    Write a Grub4Dos MBR to device\n"));
+   printf(
+      _("    -G, --mbrgrub2  Write a Grub 2 MBR to device\n"));
    printf(
       _("    -z, --mbrzero   Write an empty (zeroed) MBR to device\n"));
    printf(
@@ -436,8 +544,9 @@ void print_help(const char *szCommand)
    printf(
       _("    -v, --version   Show program version\n"));
    printf(
-_("    -w, --write     Write automatically selected boot record to device\n\n"));
-   printf(_("    Default         Inspect current boot record\n\n"));
+      _("    -w, --write     Write automatically selected boot record to device\n\n"));
+   printf(
+      _("    Default         Inspect current boot record\n\n"));
    printf(
       _("Warning: Writing the wrong kind of boot record to a device might\n"));
    printf(
@@ -454,9 +563,9 @@ void print_version(void)
 } /* print_version */
 
 int parse_switches(int argc, char **argv, int *piBr,
-		   int *pbForce, int *pbPrintVersion,
-		   int *pbKeepLabel, int *pbWritePartitionInfo,
-		   int *piHeads, char **pszOemId)
+		   int *pbForce, int *pbPrintVersion, int *pbKeepLabel,
+		   int *pbWritePartitionInfo, int *piHeads,
+		   char **pszOemId, unsigned long *pulBytesPerSector)
 {
    int bHelp = 0;
    int i;
@@ -467,8 +576,9 @@ int parse_switches(int argc, char **argv, int *piBr,
    *pbKeepLabel = 1;
    *pbWritePartitionInfo = 0;
    *piHeads = -1;
-   
-   
+   *pulBytesPerSector = 512;
+
+
    if(argc < 2)
       return 1;
    /* Don't parse the device */
@@ -492,6 +602,12 @@ int parse_switches(int argc, char **argv, int *piBr,
 	 *piBr = FAT32_BR;
       else if( ! strcmp("--fat32free", argv[argc]))
 	 *piBr = FAT32FD_BR;
+      else if( ! strcmp("--fat32ros", argv[argc]))
+	 *piBr = FAT32ROS_BR;
+      else if( ! strcmp("--fat32kos", argv[argc]))
+	 *piBr = FAT32KOS_BR;
+      else if( ! strcmp("--fat16ros", argv[argc]))
+	 *piBr = FAT16ROS_BR;
       else if( ! strcmp("--fat16free", argv[argc]))
 	 *piBr = FAT16FD_BR;
       else if( ! strcmp("--fat16", argv[argc]))
@@ -505,9 +621,9 @@ int parse_switches(int argc, char **argv, int *piBr,
       else if( ! strcmp("--partition", argv[argc]))
 	 *pbWritePartitionInfo = 1;
       else if( ! strcmp("--mbr7", argv[argc]))
-         *piBr = MBR_WIN7;
+	 *piBr = MBR_WIN7;
       else if( ! strcmp("--mbrvista", argv[argc]))
-         *piBr = MBR_VISTA;
+	 *piBr = MBR_VISTA;
       else if( ! strcmp("--mbr", argv[argc]))
 	 *piBr = MBR_2000;
       else if( ! strcmp("--mbr95b", argv[argc]))
@@ -518,6 +634,16 @@ int parse_switches(int argc, char **argv, int *piBr,
 	 *piBr = MBR_SYSLINUX;
       else if( ! strcmp("--mbrgptsyslinux", argv[argc]))
 	 *piBr = MBR_GPT_SYSLINUX;
+      else if( ! strcmp("--mbrrufus", argv[argc]))
+	 *piBr = MBR_RUFUS;
+      else if( ! strcmp("--mbrreactos", argv[argc]))
+	 *piBr = MBR_REACTOS;
+      else if( ! strcmp("--mbrkolibrios", argv[argc]))
+	 *piBr = MBR_KOLIBRIOS;
+      else if( ! strcmp("--mbrgrub4dos", argv[argc]))
+	 *piBr = MBR_GRUB4DOS;
+      else if( ! strcmp("--mbrgrub2", argv[argc]))
+	 *piBr = MBR_GRUB2;
       else if( ! strcmp("--mbrzero", argv[argc]))
 	 *piBr = MBR_ZERO;
       else if( ! strcmp("--write", argv[argc]))
@@ -530,6 +656,9 @@ int parse_switches(int argc, char **argv, int *piBr,
 	 {
 	    switch(argv[argc][i])
 	    {
+	       case '0':
+		  *piBr = MBR_REACTOS;
+		  break;
 	       case '1':
 		  *piBr = FAT12_BR;
 		  break;
@@ -551,6 +680,15 @@ int parse_switches(int argc, char **argv, int *piBr,
 	       case '6':
 		  *piBr = FAT16_BR;
 		  break;
+	       case 'o':
+		  *piBr = FAT16ROS_BR;
+		  break;
+	       case 'O':
+		  *piBr = FAT32ROS_BR;
+		  break;
+	       case 'K':
+		  *piBr = FAT32KOS_BR;
+		  break;
 	       case 'n':
 		  *piBr = NTFS_BR;
 		  break;
@@ -563,12 +701,12 @@ int parse_switches(int argc, char **argv, int *piBr,
 	       case 'p':
 		  *pbWritePartitionInfo = 1;
 		  break;
-               case '7':
-                  *piBr = MBR_WIN7;
-                  break;
-               case 'i':
-                  *piBr = MBR_VISTA;
-                  break;
+	       case '7':
+		  *piBr = MBR_WIN7;
+		  break;
+	       case 'i':
+		  *piBr = MBR_VISTA;
+		  break;
 	       case 'm':
 		  *piBr = MBR_2000;
 		  break;
@@ -578,11 +716,23 @@ int parse_switches(int argc, char **argv, int *piBr,
 	       case 'd':
 		  *piBr = MBR_DOS;
 		  break;
+	       case 'r':
+		  *piBr = MBR_RUFUS;
+		  break;
 	       case 's':
 		  *piBr = MBR_SYSLINUX;
 		  break;
 	       case 't':
 		  *piBr = MBR_GPT_SYSLINUX;
+		  break;
+	       case 'g':
+		  *piBr = MBR_GRUB4DOS;
+		  break;
+	       case 'G':
+		  *piBr = MBR_GRUB2;
+		  break;
+	       case 'k':
+		  *piBr = MBR_KOLIBRIOS;
 		  break;
 	       case 'z':
 		  *piBr = MBR_ZERO;
@@ -602,6 +752,11 @@ int parse_switches(int argc, char **argv, int *piBr,
       else if((!strcmp("--heads", argv[argc-1]) || !strcmp("-H", argv[argc-1])) &&
 	      isnumber(argv[argc]))
 	 *piHeads = atoi(argv[argc--]);
+      else if((!strcmp("--bps", argv[argc-1]) || !strcmp("-B", argv[argc-1])) &&
+	      isnumber(argv[argc]))
+	 *pulBytesPerSector = strtoul(argv[argc--], NULL, 0);
+	 if ((*pulBytesPerSector < 512) || (*pulBytesPerSector > 65536))
+		  *pulBytesPerSector = 512;
       else if((!strcmp("--writeoem", argv[argc-1]) || !strcmp("-O", argv[argc-1])))
 	 *pszOemId = argv[argc--];
       else
