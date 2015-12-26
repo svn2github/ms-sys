@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH MS-SYS 1 "September 25, 2005"
+.TH MS-SYS 1 "December 26, 2015"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -50,6 +50,15 @@ Write a FAT16 partition DOS (Win9x) boot record to device.
 Write a NTFS partition Windows 7 boot record to device. This
 functionality should be considered experimental and probably
 is of no practical use.
+.TP
+.B \-o, \-\-fat16ros
+Write a FAT16 partition ReactOS boot record to device.
+.TP
+.B \-c, \-\-fat32ros
+Write a FAT32 partition ReactOS boot record to device.
+.TP
+.B \-q, \-\-fat32kos
+Write a FAT32 partition KolibriOS boot record to device.
 .TP
 .B \-l, \-\-wipelabel
 Reset partition disk label in boot record.
@@ -105,6 +114,21 @@ This MBR will boot any partition types beyond cylinder
 .B \-t, \-\-mbrgptsyslinux
 Write a GPL syslinux GPT MBR to device.
 This MBR will boot from a GPT partition table.
+.TP
+.B \-a, \-\-mbrreactos
+Write a ReactOS MBR to device.
+.TP
+.B \-k, \-\-mbrkolibrios
+Write a KolibriOS MBR to device.
+.TP
+.B \-r, \-\-mbrrufus
+Write a Rufus MBR to device.
+.TP
+.B \-g, \-\-mbrgrub4dos
+Write a Grub4Dos MBR to device.
+.TP
+.B \-b, \-\-mbrgrub2
+Write a Grub 2 MBR to device.
 .TP
 .B \-z, \-\-mbrzero
 Write an empty (zeroed, non-bootable) master boot record to device.

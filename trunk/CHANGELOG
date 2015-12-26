@@ -5,7 +5,8 @@ Date       Version  Comment
                     added support for KolibriOS MBR and FAT32 boot record,
                     added support for ReactOS MBR, FAT32 and FAT16 BR,
                     added support for Rufus MBR,
-                    added experimental support for large sectors ( > 512).
+                    added experimental support for large sectors ( > 512),
+                    now possible to alter OEM ID of FAT and NTFS boot records.
 
 26/9  2015 2.5.1    Added support to run on OpenBSD,
                     added german translation.

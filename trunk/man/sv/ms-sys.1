@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH MS-SYS 1 "September 25, 2005"
+.TH MS-SYS 1 "December 26, 2005"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -50,6 +50,15 @@ Skriv en FAT16 partition DOS (Win9x) boot sektor till enheten.
 .B \-n, \-\-ntfs
 Skriv en NTFS partition Windows 7 boot sektor till enheten. Denna
 funktionalitet \[:a]r dock enbart experimentell och sannolikt ej användbar.
+.TP
+.B \-o, \-\-fat16ros
+Skriv en FAT16 partition ReactOS boot sektor till enheten.
+.TP
+.B \-c, \-\-fat32ros
+Skriv en FAT32 partition ReactOS boot sektor till enheten.
+.TP
+.B \-q, \-\-fat32kos
+Skriv en FAT32 partition KolibriOS boot sektor till enheten.
 .TP
 .B \-l, \-\-wipelabel
 Nollst\[:a]ll partitionens etikett i boot sektorn.
@@ -105,6 +114,22 @@ Denna MBR kan boota alla partitionstyper bortom cylinder
 .B \-t, \-\-mbrgptsyslinux
 Skriv en GPL syslinux GPT MBR till enheten.
 Denna MBR bootar fr\[oa]n en GPT partitionstabell.
+.TP
+.B \-a, \-\-mbrreactos
+Skriv en ReactOS MBR till enheten.
+.TP
+.B \-k, \-\-mbrkolibrios
+Skriv en KolibriOS MBR till enheten.
+.TP
+.B \-r, \-\-mbrrufus
+Skriv en Rufus MBR till enheten.
+Denna MBR bootar fr\[oa]n en GPT partitionstabell.
+.TP
+.B \-g, \-\-mbrgrub4dos
+Skriv en Grub4Dos MBR till enheten.
+.TP
+.B \-b, \-\-mbrgrub2
+Skriv en Grub 2 MBR till enheten.
 .TP
 .B \-z, \-\-mbrzero
 Skriv en tom (nollst\[:a]lld, icke-bootbar) master boot record till enheten.

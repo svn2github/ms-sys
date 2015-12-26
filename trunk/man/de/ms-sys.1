@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH MS-SYS 1 "September 27, 2015"
+.TH MS-SYS 1 "December 26, 2015"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -51,6 +51,15 @@ Schreibt einen FAT16 Partition DOS (Win9x) Bootrecord aufs Ger\[:a]t,
 Schreibt einen NTFS Partition Windows 7 Bootrecord aufs Ger\[:a]t.
 Diese Funktionalit\[:a]t sollte als experimentell angesehen werden und 
 ist wahrscheinlich von keinem praktischen Nutzen.
+.TP
+.B \-o, \-\-fat16ros
+Schreibt einen FAT16 Partition ReactOS Bootrecord aufs Ger\[:a]t.
+.TP
+.B \-c, \-\-fat32ros
+Schreibt einen FAT32 Partition ReactOS Bootrecord aufs Ger\[:a]t.
+.TP
+.B \-q, \-\-fat32kos
+Schreibt einen FAT32 Partition KolibriOS Bootrecord aufs Ger\[:a]t.
 .TP
 .B \-l, \-\-wipelabel
 Entfernt Volumenlabel im Bootrecord.
@@ -108,6 +117,21 @@ Dieser MBR wird jeden Partitionstypen jenseits der Zylindergrenze
 .B \-t, \-\-mbrgptsyslinux
 Schreibt einen GPL Syslinux GPT Master-Bootrecord aufs Ger\[:a]t.
 Dieser MBR wird booten von einer GUID-Partitionstabelle.
+.TP
+.B \-a, \-\-mbrreactos
+Schreibt einen ReactOS Master-Bootrecord aufs Ger\[:a]t.
+.TP
+.B \-k, \-\-mbrkolibrios
+Schreibt einen KolibriOS Master-Bootrecord aufs Ger\[:a]t.
+.TP
+.B \-r, \-\-mbrrufus
+Schreibt einen Rufus Master-Bootrecord aufs Ger\[:a]t.
+.TP
+.B \-g, \-\-mbrgrub4dos
+Schreibt einen Grub4Dos Master-Bootrecord aufs Ger\[:a]t.
+.TP
+.B \-b, \-\-mbrgrub2
+Schreibt einen Grub 2 Master-Bootrecord aufs Ger\[:a]t.
 .TP
 .B \-z, \-\-mbrzero
 Schreibt einen leeren (augenullten, nicht startbaren) Master-Bootrecord aufs Ger\[:a]t.

@@ -455,7 +455,7 @@ void diagnose(FILE *fp, const char *szPath)
       else if(entire_fat_32_pe_br_matches(fp))
       {
 	 printf(
-	   _("it is exactly the kind of FAT32 NT boot record this program\n"));
+	   _("it is exactly the kind of FAT32 PE boot record this program\n"));
 	 printf(
 	    _("would create with the switch -e on a FAT32 partition.\n"));
       }
