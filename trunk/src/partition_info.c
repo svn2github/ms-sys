@@ -60,9 +60,12 @@ int write_partition_physical_disk_drive_id_fat32(FILE *fp)
    return write_data(fp, 0x40, &ucId, 1);
 } /* write_partition_physical_disk_drive_id_fat32 */
 
+#if 0
+/* This code is not yet used */
 int write_partition_physical_disk_drive_id_fat16(FILE *fp)
 {
    unsigned char ucId = 0x80; /* C: */
    
    return write_data(fp, 0x24, &ucId, 1);
 } /* write_partition_physical_disk_drive_id_fat16 */
+#endif
