@@ -76,38 +76,38 @@ Skriver OEM ID <s> till filsystem.
 .TP
 .B \-7, \-\-mbr7
 Skriv en Windows 7 master boot sektor till enheten.
-Detta \[:a]ndrar ej disk signatur (byte 01b8-01bd).
+Detta \[:a]ndrar ej windows disk signatur (byte 01b8-01bd).
 Denna MBR kan boota viss partitionstyper bortom cylinder
 1024 med hj\[:a]lp av LBA-adressering.
 .TP
 .B \-i, \-\-mbrvista
 Skriv en Windows Vista master boot sektor till enheten.
-Detta \[:a]ndrar ej disk signatur (byte 01b8-01bd).
+Detta \[:a]ndrar ej windows disk signatur (byte 01b8-01bd).
 Denna MBR kan boota viss partitionstyper bortom cylinder
 1024 med hj\[:a]lp av LBA-adressering.
 .TP
 .B \-m, \-\-mbr
 Skriv en Windows 2000/XP/2003 master boot sektor till enheten.
-Detta \[:a]ndrar ej disk signatur (byte 01b8-01bd).
+Detta \[:a]ndrar ej windows disk signatur (byte 01b8-01bd).
 Denna MBR kan boota vissa partitionstyper bortom cylinder
 1024 med hj\[:a]lp av LBA-adressering.
 .TP
 .B \-9, \-\-mbr95b
 Skriv en Windows 95B/98/98SE/ME master boot sektor till enheten.
-Detta \[:a]ndrar ej disk signatur (byte 01b8-01bd) eller
+Detta \[:a]ndrar ej windows disk signatur (byte 01b8-01bd) eller
 boot enhet och tid (byte 00da-00df).
 Denna MBR kan boota FAT-LBA partitioner av typ 0c och 0e bortom
 cylinder 1024 med hj\[:a]lp av LBA-adressering.
 .TP
 .B \-d, \-\-mbrdos
 Skriv en DOS/Windows NT master boot sektor till enheten.
-Detta \[:a]ndrar ej disk signatur (byte 01b8-01bd).
+Detta \[:a]ndrar ej windows disk signatur (byte 01b8-01bd).
 Denna MBR kan inte boota bortom cylinder 1024 d\[oa] den ej st\[:o]djer
 LBA-adressering.
 .TP
 .B \-s, \-\-mbrsyslinux
 Skriv en syslinux master boot sektor till enheten.
-Detta \[:a]ndrar ej disk signatur (byte 01b8-01bd).
+Detta \[:a]ndrar ej windows disk signatur (byte 01b8-01bd).
 Denna MBR kan boota alla partitionstyper bortom cylinder
 1024 med hj\[:a]lp av LBA-adressering.
 .TP
@@ -133,7 +133,7 @@ Skriv en Grub 2 MBR till enheten.
 .TP
 .B \-z, \-\-mbrzero
 Skriv en tom (nollst\[:a]lld, icke-bootbar) master boot record till enheten.
-Nollst\[:a]ller alla byte utom partitionstabellen och signaturen (bytes 01be-01ff). 
+Nollst\[:a]ller alla byte utom partitionstabellen och signatur id (bytes 01be-01ff). 
 Denna funktionalitet motsvarar den tomma DOS partitionstabell som fdisk skapar.
 .TP
 .B \-f, \-\-force
