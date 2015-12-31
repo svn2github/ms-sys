@@ -1,5 +1,5 @@
 /******************************************************************
-    Copyright (C) 2009  Henrik Carlqvist
+    Copyright (C) 2009-2015  Henrik Carlqvist
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,6 +28,19 @@ void set_bytes_per_sector(unsigned long ulValue)
    if ((ulBytesPerSector < 512) || (ulBytesPerSector > 65536))
       ulBytesPerSector = 512;
 } /* set_bytes_per_sector */
+
+uint32_t read_windows_disk_signature(FILE *fp)
+{
+   uint32_t tWDS;
+   if(!read_data(fp, 0x1b8, &tWDS, 4))
+      return 0;
+   return tWDS;
+} /* read_windows_disk_signature */
+
+int write_windows_disk_signature(FILE *fp, uint32_t tWDS)
+{
+   return write_data(fp, 0x1b8, &tWDS, 4);
+} /* write_windows_disk_signature */
 
 int is_br(FILE *fp)
 {
@@ -175,6 +188,17 @@ int is_zero_mbr(FILE *fp)
       contains_data(fp, 0x0, mbr_zero_0x0, sizeof(mbr_zero_0x0));
 	/* Don't bother to check 55AA signature */
 } /* is_zero_mbr */
+
+int is_zero_mbr_with_other_windows_disk_signature(FILE *fp)
+{
+   #include "mbr_zero.h"
+
+   return
+      (!contains_data(fp, 0x0, mbr_zero_0x0, sizeof(mbr_zero_0x0))) &&
+      contains_data(fp, 0x0, mbr_zero_0x0, 0x1b8);
+      contains_data(fp, 0x1bc, mbr_zero_0x0, 2);
+	/* Don't bother to check 55AA signature */
+} /* is_zero_mbr_with_other_windows_disk_signature */
 
 /* Handle nonstandard sector sizes (such as 4K) by writing
    the boot marker at every 512-2 bytes location */

@@ -37,7 +37,9 @@ void print_version(void);
 int parse_switches(int argc, char **argv, int *piBr,
 		   int *pbForce, int *pbPrintVersion,
 		   int *pbKeepLabel, int *pbWritePartitionInfo, int *piHeads,
-		   char **pszOemId);
+		   char **pszOemId,
+		   int *pbWriteWindowsDiskSignature,
+		   uint32_t *tWindowsDiskSignature);
 int isnumber(const char *szString);
 
 int main(int argc, char **argv)
@@ -50,12 +52,15 @@ int main(int argc, char **argv)
    int bWritePartitionInfo = 0;
    int iHeads = -1;
    char *szOemId = NULL;
+   int bWriteWindowsDiskSignature = 0;
+   uint32_t tWindowsDiskSignature = 0x0;
    int iRet = 0;
 
    nls_init();
    if(parse_switches(argc, argv, &iBr, &bForce, &bPrintVersion,
 		     &bKeepLabel, &bWritePartitionInfo, &iHeads,
-		     &szOemId))
+		     &szOemId,
+		     &bWriteWindowsDiskSignature, &tWindowsDiskSignature))
    {
       print_help(argv[0]);
       return 0;
@@ -67,7 +72,8 @@ int main(int argc, char **argv)
 	 return 0;
    }
    fp=fopen(argv[argc-1],
-	    (iBr || bWritePartitionInfo || szOemId) ? "r+b" : "rb");
+	    (iBr || bWritePartitionInfo || szOemId || bWriteWindowsDiskSignature) ?
+	    "r+b" : "rb");
    if(!fp)
    {
       printf(_("Unable to open %s, %s\n"), argv[argc-1], strerror(errno));
@@ -91,6 +97,14 @@ int main(int argc, char **argv)
    if(szOemId && !bForce)
    {
       if( ! ok_to_write_oem_id(fp, argv[argc-1], 1) )
+      {
+	 fclose(fp);
+	 return 1;
+      }
+   }
+   if(bWriteWindowsDiskSignature && !bForce)
+   {
+      if( ! sanity_check(fp, argv[argc-1], MBR_ZERO, 1) )
       {
 	 fclose(fp);
 	 return 1;
@@ -145,7 +159,7 @@ int main(int argc, char **argv)
    {
       case NO_WRITING:
       {
-	 if( (!bWritePartitionInfo) && (!szOemId) )
+	 if( (!bWritePartitionInfo) && (!szOemId) && (!bWriteWindowsDiskSignature) )
 	 {
 	    diagnose(fp, argv[argc-1]);
 	 }
@@ -475,9 +489,21 @@ int main(int argc, char **argv)
       if(write_oem_id(fp, szOemId))
 	 printf(_("OEM ID '%s' successfully written to %s\n"),
 		szOemId, argv[argc-1]);
+      else
+      {
+	 printf(_("Failed writing OEM ID to %s\n"),
+		argv[argc-1]);
+	 iRet = 1;
+      }	    
+   }
+   if(bWriteWindowsDiskSignature)
+   {
+      if(write_windows_disk_signature(fp, tWindowsDiskSignature))
+	 printf(_("Windows Disk Signature 0x%08x successfully written to %s\n"),
+		tWindowsDiskSignature, argv[argc-1]);
 	 else
 	 {
-	    printf(_("Failed writing OEM ID to %s\n"),
+	    printf(_("Failed writing Windows Disk Signature to %s\n"),
 		   argv[argc-1]);
 	    iRet = 1;
 	 }	    
@@ -523,6 +549,8 @@ void print_help(const char *szCommand)
       _("    -B, --bps <n>   Manually set number of bytes per sector (default 512)\n"));
    printf(
       _("    -O, --writeoem <s>   Write OEM ID string <s> to file system\n"));
+   printf(
+      _("    -S, --writewds <x>   Write Windows Disk Signature hexadecimal <x> to MBR\n"));
    printf(
       _("    -7, --mbr7      Write a Windows 7 MBR to device\n"));
    printf(
@@ -577,7 +605,9 @@ void print_version(void)
 int parse_switches(int argc, char **argv, int *piBr,
 		   int *pbForce, int *pbPrintVersion, int *pbKeepLabel,
 		   int *pbWritePartitionInfo, int *piHeads,
-		   char **pszOemId)
+		   char **pszOemId,
+		   int *pbWriteWindowsDiskSignature,
+		   uint32_t *ptWindowsDiskSignature)
 {
    int bHelp = 0;
    int i;
@@ -588,6 +618,8 @@ int parse_switches(int argc, char **argv, int *piBr,
    *pbKeepLabel = 1;
    *pbWritePartitionInfo = 0;
    *piHeads = -1;
+   *pbWriteWindowsDiskSignature = 0;
+   *ptWindowsDiskSignature = 0;
 
    if(argc < 2)
       return 1;
@@ -767,6 +799,11 @@ int parse_switches(int argc, char **argv, int *piBr,
 	 set_bytes_per_sector(strtoul(argv[argc--], NULL, 0));
       else if((!strcmp("--writeoem", argv[argc-1]) || !strcmp("-O", argv[argc-1])))
 	 *pszOemId = argv[argc--];
+      else if((!strcmp("--writewds", argv[argc-1]) || !strcmp("-S", argv[argc-1])))
+      {
+	 *pbWriteWindowsDiskSignature = 1;
+	 *ptWindowsDiskSignature = strtoul(argv[argc--], NULL, 16);
+      }
       else
 	 bHelp = 1;
    }

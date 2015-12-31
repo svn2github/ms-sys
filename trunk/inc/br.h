@@ -2,9 +2,16 @@
 #define BR_H
 
 #include <stdio.h>
+#include <stdint.h>
 
 /* Sets custom number of bytes per sector, default value is 512 */
 void set_bytes_per_sector(unsigned long ulValue);
+
+/* Gets Windows Disk Signature from MBR */
+uint32_t read_windows_disk_signature(FILE *fp);
+
+/* Sets a new Windows Disk Signature to MBR */
+int write_windows_disk_signature(FILE *fp, uint32_t tWDS);
 
 /* returns TRUE if the file has a boot record, otherwise FALSE.
    The file position will change when this function is called! */
@@ -70,6 +77,7 @@ int is_syslinux_gpt_mbr(FILE *fp);
 /* returns TRUE if the file has a zeroed master boot record, otherwise
    FALSE.The file position will change when this function is called! */
 int is_zero_mbr(FILE *fp);
+int is_zero_mbr_with_other_windows_disk_signature(FILE *fp);
 
 /* Writes a dos master boot record to a file, returns TRUE on success, otherwise
    FALSE */
