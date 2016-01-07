@@ -633,7 +633,7 @@ void diagnose(FILE *fp, const char *szPath)
       printf(
 	 _("program creates with the switch -z on a hard disk device.\n"));
    }
-   else if(is_zero_mbr_with_other_windows_disk_signature(fp))
+   else if(is_zero_mbr_not_including_disk_signature_or_copy_protect(fp))
    {
       printf(
 	 _("it is a non-bootable master boot record, almost like the one this\n"));
@@ -643,7 +643,11 @@ void diagnose(FILE *fp, const char *szPath)
 	 _("with windows disk signature 0x%08x\n"),
 	 read_windows_disk_signature(fp));
       printf(
-	 _("which this program can write with switch -S.\n"));
+	 _("which this program can write with switch -S and copy protect\n"));
+      printf(
+	 _("bytes 0x%04x (%s).\n"),
+	 read_mbr_copy_protect_bytes(fp),
+	 read_mbr_copy_protect_bytes_explained(fp));
    }
    else
       printf(_("it is an unknown boot record\n"));
