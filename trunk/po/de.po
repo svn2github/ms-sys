@@ -841,7 +841,8 @@ msgstr ""
 msgid ""
 "    -q, --fat32kos  Write a FAT32 partition KolibriOS boot record to device\n"
 msgstr ""
-"    -q, --fat32kos  Schreibt einen FAT32 partition KolibriOS Bootrecord auf Gerät\n"
+"    -q, --fat32kos  Schreibt einen FAT32 partition KolibriOS Bootrecord auf\n"
+"                    Gerät\n"
 
 #: src/main.c:541
 #, c-format
@@ -872,7 +873,7 @@ msgstr "    -H, --heads <n> Anzahl der Köpfe, wenn Partition-Info geschrieben wi
 #, c-format
 msgid ""
 "    -B, --bps <n>   Manually set number of bytes per sector (default 512)\n"
-msgstr "    -B, --bps <n>   Manuell eingestellt Anzahl von Bytes pro Sektor (default 512)\n"
+msgstr "    -B, --bps <n>   Manuell eingestellt Anzahl von Bytes pro Sektor (std 512)\n"
 
 #: src/main.c:551
 #, c-format
@@ -885,8 +886,8 @@ msgid ""
 "    -S, --writewds <x>   Write Windows Disk Signature hexadecimal <x> to "
 "MBR\n"
 msgstr ""
-"    -S, --writewds <x>   Schreibt Windows Platten-Signatur hexadezimal <x> zum "
-"MBR\n"
+"    -S, --writewds <x>   Schreibt Windows Platten-Signatur hexadezimal <x> zum\n"
+"                         MBR\n"
 
 #: src/main.c:555
 #, c-format
