@@ -435,7 +435,7 @@ msgstr "dies ist ein nicht bootfähiger Master-Bootrecord, fast wie ihn dieses\n"
 #: src/identify.c:641
 #, c-format
 msgid "program creates with the switch -z on a hard disk device but\n"
-msgstr "Programm auf einer Festplatte erstellt mit dem Schalter -z aber"
+msgstr "Programm auf einer Festplatte erstellt mit dem Schalter -z aber\n"
 
 #: src/identify.c:643
 #, c-format
@@ -886,6 +886,7 @@ msgid ""
 "MBR\n"
 msgstr ""
 "    -S, --writewds <x>   Schreibt Windows Platten-Signatur hexadezimal <x> zum "
+"MBR\n"
 
 #: src/main.c:555
 #, c-format

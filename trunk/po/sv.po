@@ -885,6 +885,7 @@ msgid ""
 "MBR\n"
 msgstr ""
 "    -S, --writewds <x>   Skriv hexadecimal <x> Windows Disk Signatur till "
+"MBR\n"
 
 #: src/main.c:555
 #, c-format
