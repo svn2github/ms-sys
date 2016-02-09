@@ -1,0 +1,256 @@
+.\"                                      Hey, EMACS: -*- nroff -Tutf8 -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH MS-SYS 1 "February 09, 2016"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NOM
+ms-sys \- écrit des secteurs de démarrage de type Microsoft et autres
+.SH SYNOPSIS
+.B ms-sys
+.RI "[options] [périphérique]"
+.SH DESCRIPTION
+\fBms-sys\fP sert à écrire des secteurs de démarrage de type Microsoft, ou autres
+.SH OPTIONS
+La liste des options est donnée ci-dessous :
+.TP
+.B \-1, \-\-fat12
+Écrit un secteur de démarrage pour FAT12 de type disquette.
+.TP
+.B \-2, \-\-fat32nt
+Écrit un secteur de démarrage pour partition FAT32 de type NT.
+.TP
+.B \-e, \-\-fat32pe
+Écrit un secteur de démarrage pour partition FAT32 de type PE, pour installation USB.
+.TP
+.B \-3, \-\-fat32
+Écrit un secteur de démarrage pour partition FAT32 de type DOS (Win9x).
+.TP
+.B \-4, \-\-fat32free
+Écrit un secteur de démarrage pour partition FAT32 de type FreeDOS.
+.TP
+.B \-5, \-\-fat16free
+Écrit un secteur de démarrage pour partition FAT16 de type FreeDOS.
+.TP
+.B \-6, \-\-fat16
+Écrit un secteur de démarrage pour partition FAT16 de type DOS (Win9x).
+.TP
+.B \-n, \-\-ntfs
+Écrit un secteur de démarrage pour partition NTFS de type Windows 7.
+Cette fonctionnalité doit être considérée comme expérimentale
+et n'a probablement aucun intérêt pratique.
+.TP
+.B \-o, \-\-fat16ros
+Écrit un secteur de démarrage pour partition FAT16 de type ReactOS.
+.TP
+.B \-c, \-\-fat32ros
+Écrit un secteur de démarrage pour partition FAT32 de type ReactOS.
+.TP
+.B \-q, \-\-fat32kos
+Écrit un secteur de démarrage pour partition FAT32 de type KolibriOS.
+.TP
+.B \-l, \-\-wipelabel
+Réinitialise le label de partition disque du secteur de démarrage.
+.TP
+.B \-p, \-\-partition
+Écrit les infos de partition (secteurs cachés, nombre de têtes et
+ID de disque) dans le secteur de démarrage. Cela peut être
+nécessaire pour certaines partitions, en fonction de l'application
+qui a été utilisée pour créer le système de fichiers.
+.TP
+.B \-H <n>, \-\-heads <n>
+Spécifie le nombre de têtes, lorsque l'option -p est utilisée
+.TP
+.B \-O <s>, \-\-writeoem <s>
+Applique l'ID OEM <s> au système de fichiers.
+.TP
+.B \-S <x>, \-\-writewds <x>
+Écrit la signature de disque Windows <x> (hex) dans le MBR.
+.TP
+.B \-7, \-\-mbr7
+Écrit un Master Boot Record de type Windows 7.
+Cette opération ne change pas la signature disque (octets 01b8-01bd).
+Ce MBR peut aussi démarrer certains types de partitions, au delà du
+cylindre 1024, en utilisant le mode d'adressage 'LBA'.
+.TP
+.B \-i, \-\-mbrvista
+Écrit un Master Boot Record de type Windows Vista.
+Cette opération ne change pas la signature disque (octets 01b8-01bd).
+Ce MBR peut aussi démarrer certains types de partitions, au delà du
+cylindre 1024, en utilisant le mode d'adressage 'LBA'.
+.TP
+.B \-m, \-\-mbr
+Écrit un Master Boot Record de type Windows 2000/XP/2003.
+Cette opération ne change pas la signature disque (octets 01b8-01bd).
+Ce MBR peut aussi démarrer certains types de partitions, au delà du
+cylindre 1024, en utilisant le mode d'adressage 'LBA'.
+.TP
+.B \-9, \-\-mbr95b
+Écrit un Master Boot Record de type Windows 95B/98/98SE/ME.
+Cette opération ne change pas la Signature Disque (octets 01b8-01bd)
+ou le périphérique et horodatage de démarrage (octets 00da-00df).
+Ce MBR peut démarrer des partitions FAT-LBA de types 0c et 0e au
+delà du cylindre 1024, en utilisant le mode d'adressage 'LBA'.
+.TP
+.B \-d, \-\-mbrdos
+Écrit un Master Boot Record de type DOS/Windows NT.
+Cette opération ne change pas la signature disque (octets 01b8-01bd).
+Ce MBR ne peut pas démarrer au delà du cylindre 1024, car il ne
+supporte pas le mode d'adressage 'LBA'.
+.TP
+.B \-s, \-\-mbrsyslinux
+Écrit un Master Boot Record de type Syslinux.
+Cette opération ne change pas la signature disque (octets 01b8-01bd).
+Ce MBR peut aussi démarrer certains types de partitions, au delà du
+cylindre 1024, en utilisant le mode d'adressage 'LBA'.
+.TP
+.B \-t, \-\-mbrgptsyslinux
+Écrit un bloc GPL Syslinux de type GPT MBR.
+Ce MBR démarre seulement un système de partitions GPT.
+.TP
+.B \-a, \-\-mbrreactos
+Écrit un Master Boot Record de type ReactOS.
+.TP
+.B \-k, \-\-mbrkolibrios
+Écrit un Master Boot Record de type KolibriOS.
+.TP
+.B \-r, \-\-mbrrufus
+Écrit un Master Boot Record de type Rufus.
+.TP
+.B \-g, \-\-mbrgrub4dos
+Écrit un Master Boot Record de type Grub4DOS.
+.TP
+.B \-b, \-\-mbrgrub2
+Écrit un Master Boot Record de type GRUB 2.
+.TP
+.B \-z, \-\-mbrzero
+Écrit un Master Boot Record de type vide (zéro, non-démarrable).
+Tous les octets, en dehors de la table de partition et de la signature disque
+(octets 01be-01ff), sont mis a zéro. 
+Similaire à la table de partition vide DOS créée par fdisk.
+.TP
+.B \-f, \-\-force
+Force l'écriture des secteurs de démarrage.
+.TP
+.B \-h, \-\-help
+Affiche un sommaire des options.
+.TP
+.B \-v, \-\-version
+Affiche la version du programme.
+.TP
+.B \-w, \-\-write
+Écrit les secteurs de démarrage automatiquement sélectionnés.
+.P
+Si ms-sys est démarré sans paramètres, un diagnostic sera effectué sur le
+périphérique sélectionné.
+.br
+.SH EXEMPLES
+.P
+Notez que Windows ME est contre-indiqué pour créer des disquettes démarrables.
+En revanche, Win9x et DOS marchent correctement pour les 2 premiers exemples.
+.P
+.B Création d'une disquette 1.68 Mo démarrable
+.TP
+Cet exemple assume que votre installation de Windows est montée sous /dos et que vous avez 'mtools' et 'fdformat' installés.
+.P
+fdformat /dev/fd0u1680
+.br
+mformat a:
+.br
+ms-sys -w /dev/fd0
+.br
+mcopy /dosc/io.sys a:
+.br
+mcopy /dosc/msdos.sys a:
+.br
+mcopy /dosc/command.com a:
+.P
+.B Création d'une disquette 2.8 Mo démarrable, pour utilisation sur un CD démarrable El Torito
+.P
+dd if=/dev/zero of=floppy288.img bs=1024 count=2880
+.br
+/sbin/mkdosfs floppy288.img
+.br
+ms-sys -1 -f floppy288.img
+.br
+su
+.br
+mount -o loop floppy288.img /mnt
+.br
+cp msdos.sys /mnt/
+.br
+cp io.sys /mnt/
+.br
+cp command.com /mnt/
+.br
+(Vous voudrez sans doute ajouter un 'config.sys' et 'autoexec.bat' avec support CD-ROM)
+.br
+umount /mnt
+.br
+exit
+.br
+cp floppy288.img cd-files/boot.img
+.br
+mkisofs -b boot.img -c boot.cat -o cdimage.iso cd\-files
+.br
+(vous pouvez maintenant graver 'cdimage.iso' sur un CD en utilisant cdrecord ou un autre programme)
+.P
+.B Restoration d'une copie de sauvegarde de Win9x ou Win ME sur un nouveau disque dur
+.P
+Étape 1, utilisez GNU parted pour créer votre partition et système de fichiers FAT32 :
+.P
+parted (puis créez la partition et le système de fichiers)
+.P
+Étape 2, écrivez le MBR :
+.P
+ms-sys -w /dev/hda
+.P
+Étape 3, écrivez les secteurs de démarrage sur la partition FAT32 :
+.P
+ms-sys -w /dev/hda1
+.P
+Étape 4, montez votre nouveau système de fichiers :
+.P
+mount /dev/hda1 /mnt
+.P
+Étape 5, lisez votre copie de sauvegarde
+.P
+cd /mnt; tar -xzvf /path/to/my_windows_backup_file.tgz
+.br
+.SH ENVIRONEMENT
+Les variables LANG et LC_ALL ont leur utilisation habituelle. Peu de traductions
+sont toutefois disponibles...
+.br
+.SH BUGS
+Nous avons des rapports concernant des partitions FAT32 non-démarrables, créées
+avec la commande 'mformat -F c:'. Ce problème nous à aussi été indiqué pour des
+partitions formatées avec 'mkdosfs' et 'mkfs.vfat'. Une solution de contournement
+consiste à utiliser GNU parted pour créer la partition. Depuis la version 1.1.3,
+ms-sys a aussi l'option \-p pour essayer d'éliminer ce problème.
+Malheureusement, lorsque ms-sys est utilisé avec un noyau Linux 2.6 ou plus
+récent, l'utilisation de l'option \-p ou de GNU parted peut aussi se révéler
+infructueuse. Une autre solution possible peut consister à indiquer le nombre
+de têtes avec l'option \-H. Si votre système a été démarré avec LILO, le
+nombre correct de têtes peut être déterminé par la commande "lilo -T geom".
+.P
+L'écriture de secteurs de démarrage avec ms-sys sur une partition NTFS est
+vraisemblablement sans grand intérêt pratique. Pour Windows 7, nous avons des
+indications qu'effectuer un 'sysprep' avant de créer une image d'une partition
+NTFS peut rendre cette partition démarrable après restauration.
+.SH AUTEURS
+Cette page man a été traduite par Pete Batard. Le programme ms-sys est
+principalement écrit par Henrik Carlqvist. Le fichier 'CONTRIBUTORS' dans
+l'archive source contient la liste complète des contributions.
+.SH VOYEZ AUSSI
+mformat(1)  fdformat(8)  mkdosfs(8)  mkisofs(8)  parted(8)
